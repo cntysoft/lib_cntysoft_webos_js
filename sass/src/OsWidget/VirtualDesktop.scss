@@ -1,0 +1,37 @@
+.webos-vdesktop-app-wrapper
+{
+  cursor: pointer;
+  text-align: center;
+  position: absolute;
+}
+.webos-vdesktop-app-icon
+{
+  background-color: transparent;
+  background-repeat: no-repeat;
+}
+.webos-vdesktop-app-icon-hover
+{
+  background:  url(image-path("OsWidget/icon-hover", "png")) no-repeat;
+}
+.webos-vdesktop-app-bg
+{
+  background : #8E8F8F;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  opacity : 0.4;
+  position:absolute
+}
+
+.webos-vdesktop-app-text
+{
+  font: normal 12px tahoma,arial,verdana,sans-serif,宋体,微软雅黑;
+  text-decoration: none;
+  color:#ffffff;
+  position:absolute;
+  text-align: center;
+}
+
+.webos-vdesktop-app-wrapper.x-view-item-focused
+{
+  outline: none!important;
+}

@@ -1,21 +1,28 @@
 {
-    "name": "cntysoft-webos",
-    "type": "code",
-    "creator": "anonymous",
-    "summary": "Short summary",
-    "detailedDescription": "Long description of package",
-    "version": "1.0.0",
-    "compatVersion": "1.0.0",
-    "format": "1",
-    "slicer": {
-        "js": [
-            {
-                "path": "${package.dir}/sass/example/custom.js",
-                "isWidgetManifest": true
-            }
-        ]
-    },
-    "output": "${package.dir}/build",
-    "local": true,
-    "requires": []
+   "name": "cntysoft-webos",
+   "type": "code",
+   "creator": "anonymous",
+   "summary": "Short summary",
+   "detailedDescription": "Long description of package",
+   "version": "1.0.0",
+   "compatVersion": "1.0.0",
+   "format": "1",
+   "framework": "ext",
+   "slicer": {
+      "js": [
+         {
+            "path": "${package.dir}/sass/example/custom.js",
+            "isWidgetManifest": true
+         }
+      ]
+   },
+   "sass": {
+      "namespace": "WebOs"
+   },
+   "output": "${package.dir}/build",
+   "local": true,
+   "requires": [
+      "cntysoft-core",
+      "sencha-ext"
+   ]
 }

@@ -1,0 +1,154 @@
+.webos-status-bar
+{
+  background:  url(image-path("OsWidget/status-bar-bg", "png")) repeat-x;
+}
+
+.webos-status-btn .x-btn-inner-default-small {
+  font: 300 15px/20px 微软雅黑,helvetica,arial,verdana,sans-serif;
+  color: #000000!important;
+  padding: 0 6px;
+  max-width: 100%;
+}
+.webos-status-btn.x-btn-default-small
+{
+  background: none transparent;
+  border:none;
+  border-radius: 0;
+}
+.webos-status-btn.x-btn-pressed.x-btn-default-small{
+  border:none;
+  background-image:none;
+  background-color:#2a6d9e;
+
+}
+.webos-status-btn.x-btn-focus .x-btn-inner-default-small
+{
+  color:#ffffff!important;
+}
+.webos-status-btn.x-btn-focus.x-btn-default-small
+{
+  background-image:none;
+  background-color:#3892d3;
+  -webkit-box-shadow:none;
+  -moz-box-shadow:none;
+  box-shadow:none;
+}
+
+.webos-notification-btn .x-btn-inner-default-small {
+  font: 300 15px/20px 微软雅黑,helvetica,arial,verdana,sans-serif;
+  color: #000000!important;
+  padding: 0 6px;
+  max-width: 100%;
+}
+.webos-notification-btn.x-btn-default-small
+{
+  background: none;
+  border:none;
+  border-radius: 0;
+}
+.webos-notification-btn.x-btn-pressed.x-btn-default-small{
+  border:none;
+  background-image:none;
+  background-color:#2a6d9e;
+}
+.webos-notification-btn.x-btn-focus .x-btn-inner-default-small
+{
+  color: #000000!important;
+}
+.webos-notification-btn.x-btn-focus.x-btn-default-small
+{
+  background-image:none;
+  background-color:none;
+  -webkit-box-shadow:none;
+  -moz-box-shadow:none;
+  box-shadow:none;
+}
+.webos-notification-btn-icon
+{
+  background:  url(image-path("OsWidget/notification-btn", "png")) no-repeat;
+}
+.webos-notification-btn-icon-click
+{
+  background:  url(image-path("OsWidget/notification-btn-click", "png")) no-repeat;
+}
+
+
+.webos-status-bar-logo-btn .x-btn-inner-default-small {
+  font: 300 15px/20px 微软雅黑,helvetica,arial,verdana,sans-serif;
+  color: #000000!important;
+  padding: 0 6px;
+  max-width: 100%;
+}
+.webos-status-bar-logo-btn.x-btn-default-small
+{
+  background: none;
+  border:none;
+  border-radius: 0;
+}
+.webos-status-bar-logo-btn.x-btn-pressed.x-btn-default-small{
+  border:none;
+  background-image:none;
+  background-color:#2a6d9e;
+}
+.webos-status-bar-logo-btn.x-btn-focus .x-btn-inner-default-small
+{
+  color: #000000!important;
+}
+.webos-status-bar-logo-btn.x-btn-focus.x-btn-default-small
+{
+  background-image:none;
+  background-color:none;
+  -webkit-box-shadow:none;
+  -moz-box-shadow:none;
+  box-shadow:none;
+}
+.webos-status-bar-logo-btn-icon
+{
+  background:  url(image-path("OsWidget/logo", "png")) no-repeat;
+}
+.webos-status-bar-logo-btn-icon-click
+{
+  background:  url(image-path("OsWidget/logo-click", "png")) no-repeat;
+}
+
+.webos-status-bar-logo-btn .x-btn-icon-left>.x-btn-icon-el-default-small,.webos-status-bar-logo-btn .x-btn-icon-right>.x-btn-icon-el-default-small
+{
+  width : 90px;
+}
+
+.webos-start-btn-account-icon
+{
+  background:  url(image-path("OsWidget/menu/account", "png")) no-repeat;
+  background-size: 24px 24px;
+}
+.webos-start-btn-about-gzy-icon
+{
+  background:  url(image-path("OsWidget/menu/about-gzy", "png")) no-repeat;
+  background-size: 24px 24px;
+}
+.webos-start-btn-appstore-icon
+{
+  background:  url(image-path("OsWidget/menu/appstore", "png")) no-repeat;
+  background-size: 24px 24px;
+}
+.webos-start-btn-help-icon
+{
+  background:  url(image-path("OsWidget/menu/help", "png")) no-repeat;
+  background-size: 24px 24px;
+}
+.webos-start-btn-modify-pwd-icon
+{
+  background:  url(image-path("OsWidget/menu/modify-pwd", "png")) no-repeat;
+  background-size: 24px 24px;
+}
+
+.webos-start-btn-setting-icon
+{
+  background:  url(image-path("OsWidget/menu/setting", "png")) no-repeat;
+  background-size: 24px 24px;
+}
+.webos-start-btn-logout-icon
+{
+  background:  url(image-path("OsWidget/menu/logout", "png")) no-repeat;
+  background-size: 24px 24px;
+}

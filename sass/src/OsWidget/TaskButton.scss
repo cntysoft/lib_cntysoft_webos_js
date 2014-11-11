@@ -1,0 +1,36 @@
+.webos-taskbutton.x-btn-default-small
+{
+  background-image:  transparent!important;
+  background-position: center center;
+  border:none;
+  border-radius: 0;
+}
+
+.webos-taskbutton.x-btn-default-small.x-btn-over
+{
+  border-color:none;
+}
+.webos-taskbutton.x-btn-default-small.x-btn-focus.x-btn-over
+{
+  -webkit-box-shadow:none;
+  -moz-box-shadow:none;
+  box-shadow:none;
+}
+
+.webos-taskbutton.x-btn-default-small.x-btn-pressed{
+  border:none;
+  background-color:transparent!important;
+}
+
+.webos-taskbutton.x-btn-focus .x-btn-inner-default-small
+{
+  color:#ffffff!important;
+  background-color:transparent!important;
+}
+.webos-taskbutton.x-btn-focus.x-btn-default-small
+{
+  background-color:none;
+  -webkit-box-shadow:none;
+  -moz-box-shadow:none;
+  box-shadow:none;
+}
