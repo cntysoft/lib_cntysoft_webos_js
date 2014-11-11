@@ -18,7 +18,7 @@ Ext.define('WebOs.Component.KvDict.View', {
    /**
     * @inheritdoc
     */
-   LANG_NAMESPACE : 'Cntysoft.Component.KvDict.Lang',
+   LANG_NAMESPACE : 'WebOs.Component.KvDict.Lang',
    /**
     * 是否允许多选
     *
