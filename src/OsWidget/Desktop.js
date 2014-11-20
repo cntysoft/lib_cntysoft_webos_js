@@ -352,6 +352,7 @@ Ext.define('WebOs.OsWidget.Desktop',{
                id : C.WEBOS_V_DESKTOP + '_' + mkey,
                xtype : 'webosvirtualdesktopview',
                desktopRef : this,
+               appRef : this.appRef,
                moduleKey : mkey,
                listeners : {
                   itemclick : this.iconLeftClickHandler,

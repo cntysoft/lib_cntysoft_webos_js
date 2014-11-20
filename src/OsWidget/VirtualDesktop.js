@@ -10,6 +10,10 @@
  */
 Ext.define('WebOs.OsWidget.VirtualDesktop',{
    extend : 'Ext.view.View',
+   requires : [
+      'WebOs.OsWidget.VDDragZone',
+      'WebOs.OsWidget.VDDropZone'
+   ],
    alias : 'widget.webosvirtualdesktopview',
    statics : {
       PX : {
@@ -42,11 +46,11 @@ Ext.define('WebOs.OsWidget.VirtualDesktop',{
     desktopRef : null,
 
     /**
-    * @property {WebOs.OsWidget.Component.VDesktopGragZone} dragZone
+    * @property {WebOs.OsWidget.VDesktopGragZone} dragZone
     */
    dragZone : null,
    /**
-    * @property {WebOs.OsWidget.Component.VDesktopDropZone} dropZone
+    * @property {WebOs.OsWidget.VDesktopDropZone} dropZone
     */
    dropZone : null,
    /**
@@ -104,11 +108,13 @@ Ext.define('WebOs.OsWidget.VirtualDesktop',{
       var appCol = WebOs.getSysEnv().get(C.ENV_APP);
       var apps = [];
       var mkey = this.moduleKey;
+      var order = 0;
       appCol.each(function(app){
          if(mkey == app.module){
             //计算icon css
             app.iconCls = WebOs.Utils.getAppIconCls(app.module, app.name)
             apps.push(app);
+            app.order = order++;
          }
       });
       var store = new Ext.data.Store({
@@ -161,8 +167,8 @@ Ext.define('WebOs.OsWidget.VirtualDesktop',{
     */
    onBoxReady : function(width, height)
    {
-      //this.dragZone = new Cntysoft.SysUi.Component.VDesktopDragZone(this);
-      //this.dropZone = new Cntysoft.SysUi.Component.VDesktopDropZone(this);
+      this.dragZone = new WebOs.OsWidget.VDDragZone(this);
+      this.dropZone = new WebOs.OsWidget.VDDropZone(this);
       this.callParent(arguments);
    },
    /**
@@ -240,10 +246,10 @@ Ext.define('WebOs.OsWidget.VirtualDesktop',{
    destroy : function()
    {
       delete this.desktopRef;
-      //this.dragZone.destroy();
-      //delete this.dragZone;
-      //this.dropZone.destroy();
-      //delete this.dropZone;
+      this.dragZone.destroy();
+      delete this.dragZone;
+      this.dropZone.destroy();
+      delete this.dropZone;
       this.callParent();
    }
 });
