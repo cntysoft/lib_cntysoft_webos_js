@@ -246,7 +246,10 @@ Ext.define('WebOs.Kernel.Const', {
 
       //Api调用接口
       API_GATE_SYS : 'ApiGate/Sys',
-      API_GATE_APP : 'ApiGate/App'
+      API_GATE_APP : 'ApiGate/App',
+      //系统中使用的两种模式
+      NEW_MODE : 1,
+      MODIFY_MODE : 2
    }
 }, function(){
    alias = Ext.Function.alias;

@@ -7,6 +7,25 @@
  */
 Ext.define('WebOs.Component.FsView.GridView', {
    extend : 'Cntysoft.Component.FsView.GridView',
+   requires : [
+      'WebOs.Component.Editor.Code',
+      'WebOs.Component.Editor.Text'
+   ],
+   statics : {
+      VE_MAP : {
+         js : [true, true, 'WebOs.Component.Editor.Code'],
+         php : [true, true, 'WebOs.Component.Editor.Code'],
+         html : [true, true, 'WebOs.Component.Editor.Code'],
+         txt : [true, true, 'WebOs.Component.Editor.Text']
+      }
+   },
+   /**
+    * @return {Object}
+    */
+   getVeMapItem : function(fileType)
+   {
+      return this.statics().VE_MAP[fileType];
+   },
 
    renderUploaderWindow : function()
    {
