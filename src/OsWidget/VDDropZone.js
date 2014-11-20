@@ -73,7 +73,7 @@ Ext.define('WebOs.OsWidget.VDDropZone', {
    onNodeDrop : function(node, dd, e, data)
    {
       if(node == data.item){
-         this.desktopViewRef.vdesktop.desktop.$_move_click_$ = true;
+         this.desktopViewRef.desktopRef.$_move_click_$ = true;
          return false;
       }else{
          var desktopView = this.desktopViewRef;

@@ -456,10 +456,16 @@ Ext.define('WebOs.OsWidget.Desktop',{
     */
    iconLeftClickHandler : function(desktopView, record, item, index, e)
    {
-      var module = record.get('module');
-      var name = record.get('name');
-      var runConfig = record.get('runConfig');
-      this.runApp(module, name, runConfig);
+      if(!this.$_move_click_$){
+         var module = record.get('module');
+         var name = record.get('name');
+         var runConfig = record.get('runConfig');
+         this.runApp(module, name, runConfig);
+      }else{
+         //只能用一次
+         this.$_move_click_$ = false;
+      }
+
    },
    notificationClickCloseHandler : function(event)
    {
