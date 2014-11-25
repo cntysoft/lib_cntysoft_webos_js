@@ -79,10 +79,12 @@ Ext.define('WebOs.OsWidget.SysMenu',{
          },{
             text : this.LANG_TEXT.HELP_CENTER,
             iconCls : 'webos-start-btn-help-icon'
-         },{
-            text : this.LANG_TEXT.APP_STORE,
-            iconCls : 'webos-start-btn-appstore-icon'
-         },{
+         },
+         //   {
+         //   text : this.LANG_TEXT.APP_STORE,
+         //   iconCls : 'webos-start-btn-appstore-icon'
+         //},
+            {
             xtype  :'menuseparator'
          },{
             text : this.LANG_TEXT.LOGOUT,
