@@ -75,7 +75,12 @@ Ext.define('WebOs.Init',{
     * @property {Cntysoft.Kernel.SysEnv} sysEnv
     */
    sysEnv : null,
-
+   /**
+    * 生产环境根路径
+    */
+   basePath : window.systemProductionBasePath,
+   //是否是生产环境
+   isProduction : window.SYSTEM_IS_PRODUCTION,
    constructor : function()
    {
       this.mixins.observable.constructor.call(this);

@@ -20,7 +20,7 @@ Ext.define('WebOs.Component.Editor.Text', {
     */
    filename : '',
 
-   mode : WebOs.Const.NEW_MODE,
+   mode : WebOs.Kernel.Const.NEW_MODE,
    /**
     * 文本编辑器
     *

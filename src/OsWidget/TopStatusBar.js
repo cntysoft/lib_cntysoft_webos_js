@@ -97,7 +97,7 @@ Ext.define('WebOs.OsWidget.TopStatusBar',{
          xtype : 'button',
          cls : 'webos-status-bar-logo-btn',
          iconCls : 'webos-status-bar-logo-btn-icon',
-         width : 45,
+         width : 32,
          margin : '0 0 0 '+ this.self.START_BTN_MARGIN,
          height : this.self.HEIGHT,
          listeners : {

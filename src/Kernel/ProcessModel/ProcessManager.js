@@ -28,6 +28,10 @@ Ext.define('WebOs.Kernel.ProcessModel.ProcessManager', {
     */
    runableRefCache : null,
    /**
+    * 这个属性在生产环境里面用到，用于快速判断模块是否加载
+    */
+   loadedModules : {},
+   /**
     * 构造函数
     */
    constructor : function()
@@ -117,7 +121,7 @@ Ext.define('WebOs.Kernel.ProcessModel.ProcessManager', {
       Ext.apply(config, {
          type : WebOs.Const.RUN_TYPE_DAEMON
       });
-      this.runKernel(config);
+      this.runKernel(config, Ext.emptyFn, this);
    },
    /**
     * @param {Object} config
@@ -138,16 +142,39 @@ Ext.define('WebOs.Kernel.ProcessModel.ProcessManager', {
       Ext.applyIf(config, this.getRunableConfig(key, type));
       runConfig = config.runConfig;
       delete config.runConfig;
-      //异步加载cls
-      cls = this.getClsFromConfig(config);
-      if(!Ext.ClassManager.get(cls)){
-         WebOs.showLoadScriptMask();
-         Ext.require(cls, function(){
-            WebOs.hideLoadScriptMask();
+      if(WebOs.ME.isProduction){
+         var moduleName;
+         if(config.type == WebOs.Const.RUN_TYPE_DAEMON){
+            moduleName = 'daemons';
+            moduleFile = WebOs.ME.basePath + '/modules/daemons.js';
+         }else if(config.type == WebOs.Const.RUN_TYPE_APP){
+            moduleName = config.module;
+            moduleFile = WebOs.ME.basePath + '/modules/'+ config.module.toLowerCase() + '.js';
+         }
+         if(!!this.loadedModules[moduleName]){
             this.doRunKernel(key, type, runConfig, config, callback, scope);
-         }, this);
-      } else{
-         this.doRunKernel(key, type, runConfig, config, callback, scope);
+         }else{
+            Ext.Loader.loadScript({
+               url : moduleFile,
+               onLoad : function(){
+                  this.loadedModules[moduleName] = true;
+                  this.doRunKernel(key, type, runConfig, config, callback, scope);
+               },
+               scope : this
+            });
+         }
+      }else{
+         //异步加载cls
+         cls = this.getClsFromConfig(config);
+         if(!Ext.ClassManager.get(cls)){
+            WebOs.showLoadScriptMask();
+            Ext.require(cls, function(){
+               WebOs.hideLoadScriptMask();
+               this.doRunKernel(key, type, runConfig, config, callback, scope);
+            }, this);
+         } else{
+            this.doRunKernel(key, type, runConfig, config, callback, scope);
+         }
       }
    },
    /**
@@ -174,6 +201,7 @@ Ext.define('WebOs.Kernel.ProcessModel.ProcessManager', {
       }
       process = this.createProcess(config);
       this.startProcess(process, runConfig);
+
       callback.call(scope, process);
    },
    /**
@@ -186,22 +214,16 @@ Ext.define('WebOs.Kernel.ProcessModel.ProcessManager', {
    {
       var process;
       var runable;
-
       process = new WebOs.Kernel.ProcessModel.Process(config.processConfig);
-
       delete config.processConfig;
       runable = this.getRunableIntance(config);
-
-
       //建立关联
       runable.process = process;
       this.setupProcess(process);
-
       process.load(runable);
       if(this.hasListeners.processcreate){
          this.fireEvent('processcreate', process);
       }
-
       return this.add(process);
    },
    /**
