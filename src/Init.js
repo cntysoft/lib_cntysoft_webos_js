@@ -146,6 +146,14 @@ Ext.define('WebOs.Init',{
         });
     },
 
+    /**
+     * @returns {WebOs.Kernel.StdHandler}
+     */
+    getStdHandler : function()
+    {
+        return this.stdHandler;
+    },
+
     //几个钩子函数
     login : Ext.emptyFn,
     loginByCookie : Ext.emptyFn,
@@ -156,11 +164,15 @@ Ext.define('WebOs.Init',{
     logout : function(location, isForce)
     {
         if(isForce){
-            this.doLogout(location);
+            this.logoutHandler(location);
         }else{
-            var C = WebOs.Kernel.Const;
-            var userInfo = this.sysEnv.get(C.ENV_CUR_USER);
-            console.log(userInfo);
+            var MSG = Cntysoft.GET_LANG_TEXT('MSG.REBOOT_ASK');
+            var userName = this.sysEnv.get(WebOs.Kernel.Const.ENV_CUR_USER).name;
+            Cntysoft.showQuestionWindow(Ext.String.format(MSG, userName), function(value){
+                if('yes' == value){
+                    this.logoutHandler(location);
+                }
+            }, this);
         }
     },
     setupSysEventHandlers : function()
