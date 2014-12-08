@@ -63,14 +63,6 @@ Ext.define('WebOs.Init',{
     sysReady : false,
 
     /**
-     * 系统主题结构渲染完成
-     *
-     * @private
-     * @property {Boolean}
-     */
-    sysUiReady : false,
-
-    /**
      * 系统环境变量
      *
      * @property {Cntysoft.Kernel.SysEnv} sysEnv
@@ -88,6 +80,9 @@ Ext.define('WebOs.Init',{
     basePath : window.systemProductionBasePath,
     //是否是生产环境
     isProduction : window.SYSTEM_IS_PRODUCTION,
+
+    //在NotificationCenter构造函数中进行设置
+    notificationCenter : null,
     constructor : function()
     {
         this.mixins.observable.constructor.call(this);
@@ -144,6 +139,35 @@ Ext.define('WebOs.Init',{
             removeLoadMsg : alias(this, 'removeLoadMsg'),
             getSysUrl : alias(this, 'getSysUrl')
         });
+    },
+    /**
+     * 发送一条通知信息
+     *
+     * @param {String} title
+     * @param {String} msg
+     * @param {Boolean} emergency 是否紧急
+     * @param {Object} meta
+     */
+    sendNotificationMsg : function(title, msg, emergency, meta)
+    {
+        var argLen = arguments.length;
+        var msgType;
+        emergency = !!emergency;
+        if(4 == argLen){
+            msgType = WebOs.Kernel.Const.SYS_NOTIFICATION_MSG_CALLBACK;
+            Cntysoft.Stdlib.Object.ensureRequireKeys(meta,['module','name']);
+        }else{
+            msgType = WebOs.Kernel.Const.SYS_NOTIFICATION_MSG_TXT;
+        }
+        if(!this.sysReady){
+            this.addListener('desktopready', function(){
+                this.sendNotificationMsg(title, msg, emergency, meta);
+            }, this,{
+                single : true
+            });
+            return;
+        }
+        this.notificationCenter.addRecord(title, msg, msgType, false, emergency, meta);
     },
 
     /**

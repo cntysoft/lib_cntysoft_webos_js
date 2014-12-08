@@ -194,16 +194,16 @@ Ext.define('WebOs.Kernel.Const', {
        * 简单的纯文字的通知信息
        *
        * @readonly
-       * @property {String} SYS_TRAY_MSG_TXT
+       * @property {String} SYS_NOTIFICATION_MSG_TXT
        */
-      SYS_TRAY_MSG_TXT : 1,
+      SYS_NOTIFICATION_MSG_TXT : 1,
       /**
        * 回调函数方式的通知信息
        *
        * @readonly
-       * @property {String} SYS_TRAY_MSG_TXT
+       * @property {String} SYS_NOTIFICATION_MSG_CALLBACK
        */
-      SYS_TRAY_MSG_CALLBACK : 2,
+      SYS_NOTIFICATION_MSG_CALLBACK : 2,
       /**
        * 系统运行级别， 核心级别
        *
