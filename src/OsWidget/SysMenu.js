@@ -121,10 +121,6 @@ Ext.define('WebOs.OsWidget.SysMenu',{
             var M = this.self.AM;
             switch(code){
                 case M.ACCOUNT:
-                    WebOs.ME.sendNotificationMsg('哈哈阿斯顿哈是', 'asdaksgdjashgdjahsgdjhagsdjhagsjh', true,{
-                        module : 'Site',
-                        name : 'Ui'
-                    });
                     break;
                 case M.ABOUT_GZY:
                     break;

@@ -18,7 +18,7 @@ Ext.define('WebOs.OsWidget.AppSwitchBar',{
    },
    floating:true,
    /**
-    * @var {WebOs.OsWidget.Desktop} desktopRef
+    * @var {WebOs.Os.Desktop} desktopRef
     */
    desktopRef : null,
    constructor : function(config)

@@ -114,6 +114,13 @@ Ext.define('WebOs.OsWidget.Desktop',{
      * @param {String} newModule
      * @param {String} orgModule
      */
+    /**
+     * @event sysmenuitemclick
+     * 系统菜单项点击事件
+     *
+     * @param {WebOs.OsWidget.SysMenu} menu
+     * @param {}
+     */
     initComponent : function()
     {
         WebOs.R_SYS_UI_RENDER.setOsWidget(WebOs.Const.WEBOS_DESKTOP, this);
@@ -573,7 +580,7 @@ Ext.define('WebOs.OsWidget.Desktop',{
                         },
                         scope : this
                     });
-                    //this.moduleSelector = new WebOs.OsWidget.ModuleSelector({
+                    //this.moduleSelector = new WebOs.Os.ModuleSelector({
                     //   renderTo : Ext.getBody(),
                     //   desktopRef : this,
                     //   listeners : {
@@ -607,6 +614,8 @@ Ext.define('WebOs.OsWidget.Desktop',{
             });
         }, 200, this);
     },
+
+
     destroy : function()
     {
         delete this.LANG_TEXT;
