@@ -37,6 +37,8 @@ Ext.define('WebOs.OsWidget.Desktop',{
     desktopViewGhostRef : null,
     //private
     moduleSelector : null,
+    //private
+    desktopMenuRef : null,
     /**
      * 虚拟桌面关联的窗口
      *
@@ -135,6 +137,7 @@ Ext.define('WebOs.OsWidget.Desktop',{
                 WebOs.ME.fireEvent('desktopready');
             },
             boxready : this.desktopBoxReadyHandler,
+
             scope : this
         });
         Ext.getBody().addListener({
@@ -615,9 +618,31 @@ Ext.define('WebOs.OsWidget.Desktop',{
         }, 200, this);
     },
 
+    /**
+     * @return {Ext.menu.Menu}
+     */
+    getDesktopMenu : function()
+    {
+        if(null == this.desktopMenuRef){
+            this.desktopMenuRef = new Ext.menu.Menu({
+                width : 250,
+                listeners : {
+                    afterrender : function(menu){
+                        WebOs.ME.desktopMenuRequestHandler(menu);
+                    },
+                    scope : this
+                }
+            });
+        }
+        return this.desktopMenuRef;
+    },
 
     destroy : function()
     {
+        if(this.desktopMenuRef){
+            this.desktopMenuRef.destroy();
+            delete this.desktopMenuRef;
+        }
         delete this.LANG_TEXT;
         delete this.appRef;
         delete this.desktopViewRef;
