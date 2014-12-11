@@ -7,16 +7,7 @@
  */
 Ext.define('WebOs.OsWidget.SysMenu',{
     extend : 'Ext.container.Container',
-    statics : {
-        AM : {
-            ACCOUNT : 1,
-            MODIFY_PWD : 2,
-            SETTING : 3,
-            ABOUT_GZY : 4,
-            HELP_CENTER : 5,
-            LOGOUT : 6
-        }
-    },
+
     //private
     desktopRef : null,
     //private
@@ -25,7 +16,6 @@ Ext.define('WebOs.OsWidget.SysMenu',{
     constructor : function(config)
     {
         config = config || {};
-        this.LANG_TEXT = WebOs.GET_LANG_TEXT('DESKTOP.SYS_MENU');
         this.applyConstraintConfig(config);
         this.callParent([config]);
     },
@@ -48,8 +38,12 @@ Ext.define('WebOs.OsWidget.SysMenu',{
             click : this.sysMenuCloseHandler,
             scope : this
         });
-        Ext.apply(this, {
-            items : this.getMenuConfig()
+        this.addListener({
+            afterrender : function(menuWrapper)
+            {
+                WebOs.ME.sysmenuRequestHandler(menuWrapper);
+            },
+            scope : this
         });
         this.callParent();
     },
@@ -65,77 +59,6 @@ Ext.define('WebOs.OsWidget.SysMenu',{
                 this.hide();
             }
         }
-    },
-
-    getMenuConfig : function()
-    {
-        var M = this.self.AM;
-        return {
-            xtype : 'menu',
-            floating : false,
-            items : [{
-                text : this.LANG_TEXT.ACCOUNT,
-                iconCls : 'webos-start-btn-account-icon',
-                code : M.ACCOUNT
-            },{
-                text : this.LANG_TEXT.MODIFY_PWD,
-                iconCls : 'webos-start-btn-modify-pwd-icon',
-                code : M.MODIFY_PWD
-            },{
-                text : this.LANG_TEXT.SETTING,
-                iconCls : 'webos-start-btn-setting-icon',
-                code : M.SETTING
-            },{
-                xtype  :'menuseparator'
-            },{
-                text : this.LANG_TEXT.ABOUT_GZY,
-                iconCls : 'webos-start-btn-about-gzy-icon',
-                code : M.ABOUT_GZY
-            },{
-                text : this.LANG_TEXT.HELP_CENTER,
-                iconCls : 'webos-start-btn-help-icon',
-                code : M.HELP_CENTER
-            },
-                //   {
-                //   text : this.LANG_TEXT.APP_STORE,
-                //   iconCls : 'webos-start-btn-appstore-icon'
-                //},
-                {
-                    xtype  :'menuseparator'
-                },{
-                    text : this.LANG_TEXT.LOGOUT,
-                    iconCls : 'webos-start-btn-logout-icon',
-                    code : M.LOGOUT
-                }],
-            listeners : {
-                click : this.menuItemClickHandler,
-                scope : this
-            }
-        };
-    },
-
-    menuItemClickHandler : function(menu, item)
-    {
-        if(item){
-            var code = item.code;
-            var M = this.self.AM;
-            switch(code){
-                case M.ACCOUNT:
-                    break;
-                case M.ABOUT_GZY:
-                    break;
-                case M.MODIFY_PWD:
-                    break;
-                case M.SETTING:
-                    break;
-                case M.HELP_CENTER:
-                    break;
-                case M.LOGOUT:
-                    WebOs.ME.logout();
-                    break;
-            }
-        }
-        this.hide();
     },
 
     destroy : function()

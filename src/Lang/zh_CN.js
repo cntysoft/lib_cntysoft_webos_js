@@ -15,15 +15,7 @@ Ext.define('WebOs.Lang.zh_CN', {
             MODULE_SELECTOR : {
                 TITLE : '模块选择'
             },
-            SYS_MENU : {
-                ACCOUNT : '账号信息',
-                MODIFY_PWD : '修改密码',
-                SETTING : '系统设置',
-                ABOUT_GZY : '关于工作易',
-                HELP_CENTER : '帮助中心',
-                APP_STORE : '应用商店',
-                LOGOUT : '退出系统'
-            },
+
             TREE_NAV_WIDGET : {
                 PATH_G_INFO : '功能导航 : ',
                 BTN : {

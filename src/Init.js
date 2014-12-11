@@ -439,5 +439,24 @@ Ext.define('WebOs.Init',{
             Cntysoft.raiseError(Ext.getClassName(this), 'getAppLangCls', 'runable type : ' + type + ' is not supported');
         }
         return [type, module, name, 'Lang', WebOs.getLangType()].join('.');
+    },
+
+    /**
+     * 几个菜单获取钩子函数
+     *
+     * @param {Ext.container.Container} menuContainer
+     * @return {Object}
+     */
+    sysmenuRequestHandler : function(menuContainer)
+    {
+    },
+
+    /**
+     *
+     * @param {Ext.menu.Menu} menu
+     * @return {Object}
+     */
+    desktopMenuRequestHandler : function(menu)
+    {
     }
 });
