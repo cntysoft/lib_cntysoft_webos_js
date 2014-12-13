@@ -32,6 +32,7 @@ Ext.define('WebOs.OsWidget.AppSwitchBar',{
    {
       Ext.apply(config,{
          height : 80,
+         shadow: false,
          layout : {
             type : 'hbox'
          },

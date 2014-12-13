@@ -39,7 +39,9 @@ Ext.define('WebOs.OsWidget.NotificationCenter', {
     applyConstraintConfig : function(config)
     {
         Ext.apply(config,{
-            floating : true,
+            border : false,
+            shadow : false,
+            hideHeaders : true,
             width : this.self.WIDTH,
             y : WebOs.OsWidget.TopStatusBar.HEIGHT
         });

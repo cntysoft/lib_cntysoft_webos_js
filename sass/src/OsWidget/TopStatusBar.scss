@@ -102,14 +102,6 @@
   -moz-box-shadow:none;
   box-shadow:none;
 }
-.webos-status-bar-logo-btn-icon
-{
-  background:  url(image-path("OsWidget/logo", "png")) no-repeat;
-}
-.webos-status-bar-logo-btn-icon-click
-{
-  background:  url(image-path("OsWidget/logo-click", "png")) no-repeat;
-}
 
 .webos-status-bar-logo-btn .x-btn-icon-left>.x-btn-icon-el-default-small,.webos-status-bar-logo-btn .x-btn-icon-right>.x-btn-icon-el-default-small
 {

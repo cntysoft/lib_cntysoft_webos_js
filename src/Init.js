@@ -442,6 +442,11 @@ Ext.define('WebOs.Init',{
     },
 
     /**
+     * @param {WebOs.OsWidget.TopStatusBar} topStatusBar
+     */
+    startBtnRequestHandler : function(topStatusBar)
+    {},
+    /**
      * 几个菜单获取钩子函数
      *
      * @param {Ext.container.Container} menuContainer

@@ -6,7 +6,7 @@
  * @license    http://www.cntysoft.com/license/new-bsd     New BSD License
  */
 Ext.define('WebOs.OsWidget.SysMenu',{
-    extend : 'Ext.container.Container',
+    extend : 'Ext.menu.Menu',
 
     //private
     desktopRef : null,
@@ -25,19 +25,13 @@ Ext.define('WebOs.OsWidget.SysMenu',{
         Ext.apply(config,{
             width : 200,
             height : 250,
-            floating : true,
             hidden : true,
-            style : 'background:#ffffff',
-            layout : 'fit'
+            style : 'background:#ffffff'
         });
     },
 
     initComponent : function()
     {
-        Ext.getBody().addListener({
-            click : this.sysMenuCloseHandler,
-            scope : this
-        });
         this.addListener({
             afterrender : function(menuWrapper)
             {
@@ -48,18 +42,18 @@ Ext.define('WebOs.OsWidget.SysMenu',{
         this.callParent();
     },
 
-    sysMenuCloseHandler : function(event)
-    {
-        if(!this.isHidden()){
-            var xy = event.getXY();
-            var region = this.getRegion();
-            var btnRegion = this.startBtnRef.getRegion();
-            if((region.isOutOfBoundX(xy[0]) || region.isOutOfBoundY(xy[1]))
-                && (btnRegion.isOutOfBoundX(xy[0]) || btnRegion.isOutOfBoundY(xy[1]))){
-                this.hide();
-            }
-        }
-    },
+    //sysMenuCloseHandler : function(event)
+    //{
+    //    if(!this.isHidden()){
+    //        var xy = event.getXY();
+    //        var region = this.getRegion();
+    //        var btnRegion = this.startBtnRef.getRegion();
+    //        if((region.isOutOfBoundX(xy[0]) || region.isOutOfBoundY(xy[1]))
+    //            && (btnRegion.isOutOfBoundX(xy[0]) || btnRegion.isOutOfBoundY(xy[1]))){
+    //            this.hide();
+    //        }
+    //    }
+    //},
 
     destroy : function()
     {

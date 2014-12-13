@@ -67,6 +67,7 @@ Ext.define('WebOs.OsWidget.VirtualDesktop',{
     applyConstraintConfig : function(config)
     {
         Ext.apply(config, {
+            shadow: false,
             itemSelector : 'div.webos-vdesktop-app-wrapper',
             trackOver : true,
             overItemCls : 'webos-vdesktop-app-icon-hover',

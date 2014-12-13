@@ -30,6 +30,7 @@ Ext.define('WebOs.OsWidget.TopStatusBar',{
       Ext.apply(this,{
          layout : 'hbox',
          height : this.self.HEIGHT,
+         shadow: false,
          items : [
             this.getStartupButtonConfig(),
             this.getMenuBarConfig(),
@@ -93,35 +94,7 @@ Ext.define('WebOs.OsWidget.TopStatusBar',{
 
    getStartupButtonConfig : function()
    {
-      return {
-         xtype : 'button',
-         cls : 'webos-status-bar-logo-btn',
-         iconCls : 'webos-status-bar-logo-btn-icon',
-         width : 32,
-         margin : '0 0 0 '+ this.self.START_BTN_MARGIN,
-         height : this.self.HEIGHT,
-         listeners : {
-            afterrender : function(btn)
-            {
-               this.startBtnRef = btn;
-               btn.el.on({
-                  mousedown : function(){
-                     btn.setIconCls('webos-status-bar-logo-btn-icon-click');
-                  },
-                  mouseup : function()
-                  {
-                     btn.setIconCls('webos-status-bar-logo-btn-icon');
-                  },
-                  click : function()
-                  {
-                     this.toggleSysMenu();
-                  },
-                  scope : this
-               });
-            },
-            scope : this
-         }
-      };
+      return WebOs.ME.startBtnRequestHandler(this);
    },
 
    toggleSysMenu : function()

@@ -127,6 +127,7 @@ Ext.define('WebOs.OsWidget.Desktop',{
     {
         WebOs.R_SYS_UI_RENDER.setOsWidget(WebOs.Const.WEBOS_DESKTOP, this);
         Ext.apply(this,{
+            shadow: false,
             items : [new WebOs.OsWidget.TopStatusBar({
                 region : 'north'
             }), this.getDesktopContainer()]
