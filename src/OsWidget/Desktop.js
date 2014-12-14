@@ -366,8 +366,6 @@ Ext.define('WebOs.OsWidget.Desktop',{
                     moduleKey : mkey,
                     listeners : {
                         itemclick : this.iconLeftClickHandler,
-                        //itemcontextmenu : desktop.iconRightClickHandler,
-                        //containercontextmenu : desktop.desktopContextClickHandler,
                         scope : this
                     }
                 }
@@ -631,6 +629,10 @@ Ext.define('WebOs.OsWidget.Desktop',{
                 width : 250,
                 listeners : {
                     afterrender : function(menu){
+                        this.el.addListener({
+                            click : this.desktopMenuCloseHandler,
+                            scope : this
+                        });
                         WebOs.ME.desktopMenuRequestHandler(menu);
                     },
                     scope : this
@@ -638,6 +640,17 @@ Ext.define('WebOs.OsWidget.Desktop',{
             });
         }
         return this.desktopMenuRef;
+    },
+
+    desktopMenuCloseHandler : function(event)
+    {
+        if(!this.desktopMenuRef.isHidden()){
+            var xy = event.getXY();
+            var region =  this.desktopMenuRef.getRegion();
+            if(region.isOutOfBoundX(xy[0]) || region.isOutOfBoundY(xy[1])){
+                this.desktopMenuRef.hide();
+            }
+        }
     },
 
     destroy : function()
