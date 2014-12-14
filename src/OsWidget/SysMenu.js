@@ -32,10 +32,6 @@ Ext.define('WebOs.OsWidget.SysMenu',{
 
     initComponent : function()
     {
-        this.desktopRef.addListener({
-            click : this.sysMenuCloseHandler,
-            scope : this
-        });
         this.addListener({
             afterrender : function(menuWrapper)
             {
@@ -46,22 +42,9 @@ Ext.define('WebOs.OsWidget.SysMenu',{
         this.callParent();
     },
 
-    sysMenuCloseHandler : function(event)
-    {
-        if(!this.isHidden()){
-            var xy = event.getXY();
-            var region = this.getRegion();
-            var btnRegion = this.startBtnRef.getRegion();
-            if((region.isOutOfBoundX(xy[0]) || region.isOutOfBoundY(xy[1]))
-                && (btnRegion.isOutOfBoundX(xy[0]) || btnRegion.isOutOfBoundY(xy[1]))){
-                this.hide();
-            }
-        }
-    },
 
     destroy : function()
     {
-        this.desktopRef.removeListener('click', this.sysMenuCloseHandler, this);
         delete this.LANG_TEXT;
         delete this.desktopRef;
         delete this.startBtnRef;
