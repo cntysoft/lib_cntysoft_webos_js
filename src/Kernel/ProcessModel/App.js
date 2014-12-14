@@ -306,11 +306,7 @@ Ext.define('WebOs.Kernel.ProcessModel.App', {
          var cls = this.widgetMap[name];
          Ext.apply(config, {
             appRef : this,
-            name : name,
-            listeners : {
-               close : this.widgetCloseHandler,
-               scope : this
-            }
+            name : name
          });
          WebOs.showLoadScriptMask();
          Ext.require(cls, function(){
@@ -438,6 +434,7 @@ Ext.define('WebOs.Kernel.ProcessModel.App', {
     */
    closeWidget : function(name)
    {
+
       var widget = this.getWidget(name);
       this.widgets.remove(widget);
       if(this.selfOperation){
@@ -525,15 +522,7 @@ Ext.define('WebOs.Kernel.ProcessModel.App', {
          WebOs.PM().reflectStatusChange(status, this.process);
       }
    },
-   /**
-    * widget关闭处理器
-    *
-    * @param {WebOs.Kernel.ProcessModel.Process} widget
-    */
-   widgetCloseHandler : function(widget)
-   {
-      WebOs.R_SYS_UI_RENDER.getOsWidget(WebOs.C.WEBOS_APP_SWITCH_BAR).removeTaskButton(widget.taskButton.id);
-   },
+
    /**
     * 给widget窗口设置关联的任务栏按钮
     *

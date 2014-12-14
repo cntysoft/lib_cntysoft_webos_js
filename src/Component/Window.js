@@ -40,7 +40,10 @@ Ext.define('WebOs.Component.Window', {
             if(!this.desktopRef.isMoving){
                this.$_x_ratio_$ = this.getX() / this.desktopRef.getWidth();
             }
-
+         },
+         show : function()
+         {
+            this.el.shadow.el.setTop(this.el.getTop()+this.el.shadow.offsets.y);
          },
          scope : this
       });
@@ -56,6 +59,7 @@ Ext.define('WebOs.Component.Window', {
       var desktopRef = WebOs.R_SYS_UI_RENDER.getOsWidget(WebOs.Const.WEBOS_DESKTOP);
       Ext.apply(config,{
          hideMode : 'visibility',
+         shadow : true,
          constrain : true,
          constrainTo : Ext.getBody(),
          maximizable : true

@@ -16,7 +16,7 @@ Ext.define('WebOs.OsWidget.AppSwitchBar',{
       MIN_SWITCH_BAR_WIDTH : 800,
       MAX_SWITCH_BAR_HEIGHT : 80
    },
-   floating:true,
+
    /**
     * @var {WebOs.Os.Desktop} desktopRef
     */
@@ -32,7 +32,8 @@ Ext.define('WebOs.OsWidget.AppSwitchBar',{
    {
       Ext.apply(config,{
          height : 80,
-         shadow: false,
+         floating:true,
+         shadow : false,
          layout : {
             type : 'hbox'
          },

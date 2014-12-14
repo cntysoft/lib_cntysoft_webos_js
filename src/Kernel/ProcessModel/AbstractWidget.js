@@ -277,10 +277,16 @@ Ext.define('WebOs.Kernel.ProcessModel.AbstractWidget', {
       this.addListener({
          minimize : this.minimizeHandler,
          show : this.showHandler,
+         close : this.closeHandler,
          activate : this.activateHandler,
          afterrender : this.setWidgetPmTextHandler,
          scope : this
       });
+   },
+
+   closeHandler : function()
+   {
+      WebOs.R_SYS_UI_RENDER.getOsWidget(WebOs.C.WEBOS_APP_SWITCH_BAR).removeTaskButton(this.taskButton.id);
    },
    /**
     * widget最小化处理函数

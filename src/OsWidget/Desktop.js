@@ -549,7 +549,8 @@ Ext.define('WebOs.OsWidget.Desktop',{
             listeners : {
                 afterrender : function(cmp)
                 {
-                    cmp.setZIndex(3);
+                    cmp.toFront();
+                    cmp.toFront = Ext.emptyFn;
                 },
                 scope : this
             }
@@ -563,6 +564,7 @@ Ext.define('WebOs.OsWidget.Desktop',{
             layout : {
                 type : 'card'
             },
+            toFront : function(){},
             width : this.desktopViewGhostRef.getWidth(),
             height : this.desktopViewGhostRef.getHeight(),
             items : this.generateVirtualItems(),

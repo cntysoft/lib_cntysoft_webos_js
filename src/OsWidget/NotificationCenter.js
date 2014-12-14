@@ -40,7 +40,6 @@ Ext.define('WebOs.OsWidget.NotificationCenter', {
     {
         Ext.apply(config,{
             border : false,
-            shadow : false,
             hideHeaders : true,
             width : this.self.WIDTH,
             y : WebOs.OsWidget.TopStatusBar.HEIGHT
