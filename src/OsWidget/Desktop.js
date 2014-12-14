@@ -584,18 +584,18 @@ Ext.define('WebOs.OsWidget.Desktop',{
                         },
                         scope : this
                     });
-                    //this.moduleSelector = new WebOs.Os.ModuleSelector({
-                    //   renderTo : Ext.getBody(),
-                    //   desktopRef : this,
-                    //   listeners : {
-                    //      afterrender : function(cmp)
-                    //      {
-                    //         WebOs.R_SYS_UI_RENDER.setOsWidget(WebOs.Const.WEBOS_MODULE_SELECTOR, cmp);
-                    //         cmp.setZIndex(3);
-                    //      },
-                    //      scope : this
-                    //   }
-                    //});
+                    this.moduleSelector = new WebOs.OsWidget.ModuleSelector({
+                       renderTo : Ext.getBody(),
+                       desktopRef : this,
+                       listeners : {
+                          afterrender : function(cmp)
+                          {
+                             WebOs.R_SYS_UI_RENDER.setOsWidget(WebOs.Const.WEBOS_MODULE_SELECTOR, cmp);
+                             cmp.setZIndex(3);
+                          },
+                          scope : this
+                       }
+                    });
                 },
                 scope : this
             }
