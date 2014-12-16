@@ -13,7 +13,7 @@ Ext.define('WebOs.Component.Uploader.SimpleUploader', {
    getApiRequestMeta : function()
    {
       return {
-         name : 'WebUploader',
+         name : 'WebUploaderHandler',
          method : 'process'
       };
    }

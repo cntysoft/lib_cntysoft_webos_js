@@ -14,7 +14,7 @@ Ext.define('WebOs.Component.Uploader.Window', {
       Ext.apply(config.uploaderConfig,{
          requestUrl : WebOs.Kernel.Const.API_GATE_SYS,
          apiRequestMeta : {
-            name : 'WebUploader',
+            name : 'WebUploaderHandler',
             method : 'process'
          }
       })
