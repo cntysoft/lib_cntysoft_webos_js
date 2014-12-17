@@ -16,6 +16,7 @@ Ext.define('WebOs.Component.FsView.GridView', {
          js : [true, true, 'WebOs.Component.Editor.Code'],
          php : [true, true, 'WebOs.Component.Editor.Code'],
          html : [true, true, 'WebOs.Component.Editor.Code'],
+         css : [true, true, 'WebOs.Component.Editor.Code'],
          txt : [true, true, 'WebOs.Component.Editor.Text']
       }
    },
