@@ -495,7 +495,6 @@ Ext.define('WebOs.OsWidget.Desktop',{
     runApp : function(module, app, runConfig)
     {
         var STD_HANDLER = this.appRef.getStdHandler();
-        var CM = WebOs.Kernel.StdHandler.CODE_MAP;
         //从桌面点击进入的App强制widget为 entry
         if(Ext.isArray(runConfig)){
             runConfig = {};
@@ -503,7 +502,7 @@ Ext.define('WebOs.OsWidget.Desktop',{
         Ext.apply(runConfig,{
             widgetName : 'Entry'
         });
-        STD_HANDLER.request(CM.RUN_APP, [module, app, runConfig]);
+        STD_HANDLER.runApp(module, app, runConfig);
     },
 
     /**

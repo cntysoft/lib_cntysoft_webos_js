@@ -402,6 +402,14 @@ Ext.define('WebOs.Init',{
     },
 
     /**
+     * @returns {WebOs.Kernel.StdHandler}
+     */
+    getStdHandler : function()
+    {
+        return this.stdHandler;
+    },
+
+    /**
      * 添加一些默认的事件处理函数
      */
     attachDefaultListeners : function()
