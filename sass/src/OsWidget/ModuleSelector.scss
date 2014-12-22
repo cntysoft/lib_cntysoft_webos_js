@@ -16,29 +16,14 @@
   cursor: pointer;
   background:  url(image-path("OsWidget/module-selector-item-bg", "png")) repeat;
   color:white;
-  hieght : 80px;
 }
 .webos-module-selector-item-text
 {
-  height: 25px;
-  line-height: 25px;
+  height: 40px;
+  line-height: 40px;
   text-align: center;
 }
-.webos-module-selector-item-site
+.webos-module-selector-item-text:hover
 {
-  background:  url(image-path("OsWidget/module-selector-site", "png")) no-repeat;
-  background-position: center 10px;
-  height : 55px;
-}
-.webos-module-selector-item-wedingyue
-{
-  background:  url(image-path("OsWidget/module-selector-wedingyue", "png")) no-repeat;
-  background-position: center 10px;
-  height : 55px;
-}
-.webos-module-selector-item-weqiye
-{
-  background:  url(image-path("OsWidget/module-selector-weqiye", "png")) no-repeat;
-  height : 55px;
-  background-position: center 10px;
+  background: #00a0e9;
 }

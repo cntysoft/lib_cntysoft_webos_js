@@ -106,7 +106,7 @@ Ext.define('WebOs.OsWidget.ModuleSelector',{
                this.isAnimating = true;
                this.animate({
                   to: {
-                     height: 280
+                     height: this.items.getCount()*40
                   },
                   callback: function () {
                      this.isAnimating = false;
@@ -146,17 +146,12 @@ Ext.define('WebOs.OsWidget.ModuleSelector',{
       var miconCls;
       for(var mkey in supportedModules){
          module = supportedModules[mkey];
-         miconCls = 'webos-module-selector-item-'+mkey.toLowerCase();
          items.push({
             xtype : 'component',
             cls : 'webos-module-selector-item',
-
             autoEl: {
                tag: 'div',
                children : [{
-                  tag : 'div',
-                  cls : miconCls
-               },{
                   tag : 'div',
                   cls : 'webos-module-selector-item-text',
                   html : module.text
