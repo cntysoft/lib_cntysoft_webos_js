@@ -63,7 +63,8 @@ Ext.define('WebOs.OsWidget.Desktop',{
             id : WebOs.Const.WEBOS_DESKTOP,
             layout : {
                 type : 'border'
-            }
+            },
+            shadow : false
         });
         var appCol = WebOs.getSysEnv().get(WebOs.C.ENV_APP);
         var metas = {};
@@ -127,7 +128,6 @@ Ext.define('WebOs.OsWidget.Desktop',{
     {
         WebOs.R_SYS_UI_RENDER.setOsWidget(WebOs.Const.WEBOS_DESKTOP, this);
         Ext.apply(this,{
-            shadow: false,
             items : [new WebOs.OsWidget.TopStatusBar({
                 region : 'north'
             }), this.getDesktopContainer()]
@@ -338,6 +338,7 @@ Ext.define('WebOs.OsWidget.Desktop',{
         return {
             region : 'center',
             xtype : 'container',
+            shadow : false,
             listeners : {
                 afterrender : function(cmp)
                 {
@@ -358,10 +359,12 @@ Ext.define('WebOs.OsWidget.Desktop',{
                 xtype : 'container',
                 layout : 'fit',
                 moduleKey : mkey,
+                shadow : false,
                 items : {
                     id : C.WEBOS_V_DESKTOP + '_' + mkey,
                     xtype : 'webosvirtualdesktopview',
                     desktopRef : this,
+                    shadow : false,
                     appRef : this.appRef,
                     moduleKey : mkey,
                     listeners : {
@@ -555,6 +558,8 @@ Ext.define('WebOs.OsWidget.Desktop',{
 
         this.desktopViewRef = new Ext.container.Container({
             floating : true,
+            shadow : false,
+            frame : false,
             renderTo : Ext.getBody(),
             y : WebOs.OsWidget.TopStatusBar.HEIGHT,
             x : 0,
