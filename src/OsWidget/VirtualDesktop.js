@@ -121,7 +121,7 @@ Ext.define('WebOs.OsWidget.VirtualDesktop',{
         var mkey = this.moduleKey;
         var order = 0;
         appCol.each(function(app){
-            if(mkey == app.module){
+            if(mkey == app.module && app.showOnDesktop){
                 //计算icon css
                 app.iconCls = WebOs.Utils.getAppIconCls(app.module, app.name)
                 apps.push(app);
