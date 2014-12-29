@@ -13,7 +13,9 @@ Ext.define('WebOs.Init',{
         'WebOs.Lang.zh_CN',
         'WebOs.Kernel.ProcessModel.ProcessManager',
         'WebOs.Utils',
-        'WebOs.Kernel.StdHandler'
+        'WebOs.Kernel.StdHandler',
+        //桌面小组件
+        'WebOs.DesktopWidget.WallPaper.Main'
     ],
     mixins : {
         observable : 'Ext.util.Observable'
@@ -83,6 +85,12 @@ Ext.define('WebOs.Init',{
 
     //在NotificationCenter构造函数中进行设置
     notificationCenter : null,
+    /**
+     * 这个属性到时候有专有的系统进行主动设置
+     *
+     * @property {String} selfDataPath
+     */
+    selfDataPath : null,
     constructor : function()
     {
         this.mixins.observable.constructor.call(this);
@@ -91,6 +99,7 @@ Ext.define('WebOs.Init',{
         //实例化系统环境变量
         this.sysEnv = new Cntysoft.Kernel.SysEnv();
         this.stdHandler = new WebOs.Kernel.StdHandler();
+        this.openedWidgets = new Ext.util.HashMap();
         this.attachDefaultListeners();
         this.init();
     },
@@ -140,6 +149,17 @@ Ext.define('WebOs.Init',{
             getSysUrl : alias(this, 'getSysUrl')
         });
     },
+
+    /**
+     * 获取系统起始的根路径
+     *
+     * @return {String}
+     */
+    getSelfDataRootPath : function()
+    {
+        return this.selfDataPath;
+    },
+
     /**
      * 发送一条通知信息
      *
@@ -431,6 +451,7 @@ Ext.define('WebOs.Init',{
     {
         this.hideLoadMsg();
         this.sysReady = true;
+        this.selfDataPath = this.sysEnv.get(WebOs.Kernel.Const.ENV_SYS_SETTING).selfDataRootPath;
     },
 
     /**
@@ -471,5 +492,58 @@ Ext.define('WebOs.Init',{
      */
     desktopMenuRequestHandler : function(menu)
     {
+    },
+
+    /**
+     * 运行指定的OsWidget
+     *
+     * @param {String} cls
+     * @param {Object} config 传给DkWidget构造函数的配置对象
+     */
+    openDesktopWidget : function(name, config)
+    {
+        config = config || {};
+        var cls = 'WebOs.DesktopWidget.'+name+'.Main';
+        var widget;
+        if(this.openedWidgets.containsKey(cls)){
+            widget = this.openedWidgets.get(cls);
+            widget.show();
+            widget.openedHandler();
+            widget.toFront();
+        }else{
+            Ext.require(cls, function(){
+                Ext.apply(config,{
+                    openedWidgets : this.openedWidgets
+                });
+                widget = Ext.create(cls,config);
+                this.openedWidgets.add(cls, widget);
+                widget.show();
+            }, this);
+        }
+    },
+
+    /**
+     * 获取指定的DkWidget对象
+     *
+     * @param {String} cls
+     * @param {Object} config 传给DkWidget构造函数的配置对象
+     */
+    getWidget : function(cls, config, callback, scope)
+    {
+        scope = scope || this;
+        config = config || {};
+        callback = Ext.isFunction(callback) ? callback : Ext.emptyFn;
+        if(this.openedWidgets.containsKey(cls)){
+            callback.call(scope, this.openedWidgets.get(cls));
+        }else{
+            Ext.require(cls, function(){
+                Ext.apply(config,{
+                    openedWidgets : this.openedWidgets
+                });
+                var widget = Ext.create(cls,config);
+                this.openedWidgets.add(cls, widget);
+                callback.call(scope, widget);
+            }, this);
+        }
     }
 });

@@ -23,6 +23,7 @@
    "local": true,
    "requires": [
       "cntysoft-core",
-      "sencha-ext"
+      "sencha-ext",
+      "ext-ux"
    ]
 }
