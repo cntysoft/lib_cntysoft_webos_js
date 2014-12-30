@@ -7,6 +7,9 @@
  */
 Ext.define('WebOs.Component.CkEditor.Editor', {
    extend : 'Cntysoft.Component.CkEditor.Editor',
+   requires : [
+      'WebOs.Kernel.Const'
+   ],
    uploadRequestMeta : {
       url : WebOs.Const.API_GATE_SYS,
       meta : {
