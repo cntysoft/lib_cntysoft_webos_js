@@ -39,7 +39,7 @@ Ext.define('WebOs.Kernel.StdPath',{
        */
       getStdUploadPath : function()
       {
-         return '/PrivateSpace/UploadFiles';
+         return '/PrivateSpace';
       }
    }
 });
