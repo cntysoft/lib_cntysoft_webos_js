@@ -8,7 +8,7 @@
 Ext.define('WebOs.Component.CkEditor.Editor', {
    extend : 'Cntysoft.Component.CkEditor.Editor',
    uploadRequestMeta : {
-      url : WebOs.Const.API_GATE_SYS,
+      url : WebOs.Kernel.Const.API_GATE_SYS,
       meta : {
          name : 'WebUploaderHandler',
          method : 'process'
