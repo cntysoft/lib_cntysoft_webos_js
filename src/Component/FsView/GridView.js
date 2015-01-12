@@ -56,5 +56,5 @@ Ext.define('WebOs.Component.FsView.GridView', {
          this.uploaderRef.center();
          this.uploaderRef.show();
       }, this);
-   },
+   }
 });
