@@ -55,6 +55,10 @@ Ext.define('WebOs.DesktopWidget.WallPaper.Main', {
     originWallPaper : null,
     //private
     newWallPaper : null,
+    /**
+     * 这个是服务器端的接口，平台管理和正常的webos可能需要需要请求的网址内容不一样，修复这个bug
+     */
+    serverApi : null,
     constructor : function()
     {
         this.mixins.formTooltip.constructor.call(this);
@@ -152,6 +156,62 @@ Ext.define('WebOs.DesktopWidget.WallPaper.Main', {
     },
 
     /**
+     * 获取widget的API代理配置对象
+     *
+     * @return {Object}
+     */
+    getDkWidgetApiProxy : function(method)
+    {
+        var me = this;
+        var serverScriptName = this.widgetName;
+        if(this.serverApi){
+            serverScriptName = this.serverApi.getServerScriptName();
+        }
+        return {
+            type : 'apigateway',
+            callType : 'Sys',
+            invokeMetaInfo : {
+                name : 'DkWidget',
+                method : 'dispatcherRequest'
+            },
+            invokeParamsReady : function(params)
+            {
+                return {
+                    key : serverScriptName,
+                    method : method,
+                    args : params
+                };
+            },
+            reader : {
+                type : 'json',
+                rootProperty : 'items'
+            }
+        };
+    },
+
+    /**
+     * 调用Widget的服务器端函数接口
+     *
+     * @param {String} method
+     * @param {Object} params
+     * @param {Funtion} callback
+     * @param {Scope} scope
+     */
+    callApi : function(method, params, callback, scope)
+    {
+        var me = this;
+        var serverScriptName = this.widgetName;
+        if(this.serverApi){
+            serverScriptName = this.serverApi.getServerScriptName();
+        }
+        Cntysoft.callSys('DkWidget', 'dispatcherRequest', {
+            key : serverScriptName,
+            method : method,
+            args : params
+        }, callback, scope);
+    },
+
+    /**
      * 单击保存按钮后的操作
      */
     saveHandler : function()
@@ -170,23 +230,29 @@ Ext.define('WebOs.DesktopWidget.WallPaper.Main', {
                         data.saveToLocal = this.wallpaperNetImageRef.getForm().getValues().saveToLocal == 'on' ? true : false;
                     }
                     this.setLoading(Cntysoft.GET_LANG_TEXT('MSG.SAVE'));
-                    this.callApi('changeWallPaper', data, function(response){
-                        this.loadMask.hide();
-                        if(!response.status){
-                            Cntysoft.showErrorWindow(response.msg);
-                        } else{
-                            var data = response.data;
-                            this.originWallPaper =  this.newWallPaper;
-                            this.newWallPaper = null;
-                            this.currentUser.wallPaper = this.originWallPaper;
-                            Cntysoft.showAlertWindow(MSG.SAVE_SUCCESS, function(){
-                                this.close();
-                            }, this);
-                            this.refreshLocalImgPool();
-                        }
-                    }, this);
+                    this.callApi('changeWallPaper', data, this.afterSaveHandler, this);
                 }
+            }, this)
+        }
+    },
+
+
+
+    afterSaveHandler : function(response)
+    {
+        var MSG = this.LANG_TEXT.MSG;
+        this.loadMask.hide();
+        if(!response.status){
+            Cntysoft.showErrorWindow(response.msg);
+        } else{
+            var data = response.data;
+            this.originWallPaper =  this.newWallPaper;
+            this.newWallPaper = null;
+            this.currentUser.wallPaper = this.originWallPaper;
+            Cntysoft.showAlertWindow(MSG.SAVE_SUCCESS, function(){
+                this.close();
             }, this);
+            this.refreshLocalImgPool();
         }
     },
 
@@ -476,6 +542,7 @@ Ext.define('WebOs.DesktopWidget.WallPaper.Main', {
         delete this.wallpaperNetImageRef;
         delete this.wallPaperColorRef;
         delete this.wallPaperContainerRef;
+        delete this.serverApi;
         this.callParent();
     }
 });
