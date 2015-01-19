@@ -311,7 +311,7 @@ Ext.define('WebOs.Kernel.ProcessModel.App', {
          WebOs.showLoadScriptMask();
          Ext.require(cls, function(){
             WebOs.hideLoadScriptMask();
-            widgetObject = Ext.create(this.widgetMap[name], config);
+            var widgetObject = Ext.create(this.widgetMap[name], config);
             if(!(widgetObject instanceof WebOs.Kernel.ProcessModel.AbstractWidget)){
                Cntysoft.raiseError(
                   Ext.getClassName(this),
@@ -337,7 +337,7 @@ Ext.define('WebOs.Kernel.ProcessModel.App', {
     * @param {String} name
     * @param {Web.Kernel.ProcessModel.AbstractWidget} widget
     */
-   setupWidget : function(name, widget)
+   setupWidget : function(name, widgetObject)
    {
       //赋予widget名称
       if('' == Ext.String.trim(widgetObject.name)){
