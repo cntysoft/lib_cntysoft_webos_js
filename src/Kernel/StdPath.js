@@ -40,6 +40,15 @@ Ext.define('WebOs.Kernel.StdPath',{
       getStdUploadPath : function()
       {
          return '/PrivateSpace';
+      },
+      /**
+       * 获取platform上传路径
+       *
+       * @return {String}
+       */
+      getPlatformUploadPath : function()
+      {
+         return '/PrivateSpace/Platform';
       }
    }
 });
