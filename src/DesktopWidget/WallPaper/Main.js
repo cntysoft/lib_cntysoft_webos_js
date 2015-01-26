@@ -55,6 +55,7 @@ Ext.define('WebOs.DesktopWidget.WallPaper.Main', {
     originWallPaper : null,
     //private
     newWallPaper : null,
+    localMenuRef : null,
     /**
      * 这个是服务器端的接口，平台管理和正常的webos可能需要需要请求的网址内容不一样，修复这个bug
      */
@@ -232,7 +233,7 @@ Ext.define('WebOs.DesktopWidget.WallPaper.Main', {
                     this.setLoading(Cntysoft.GET_LANG_TEXT('MSG.SAVE'));
                     this.callApi('changeWallPaper', data, this.afterSaveHandler, this);
                 }
-            }, this)
+            }, this);
         }
     },
 
@@ -280,13 +281,11 @@ Ext.define('WebOs.DesktopWidget.WallPaper.Main', {
     {
         var parts = this.originWallPaper.split('|');
         var type = parseInt(parts[0]);
-        if(type != WebOs.Kernel.Const.WALLPAPER_COLOR && type != WebOs.Kernel.Const.WALLPAPER_IMAGE){
-            this.desktopRef.changeWallPaper(type, parts[1]);
-        }else{
-            var wallPaper = this.getDefaultWallPaper();
-            this.desktopRef.changeWallPaper(wallPaper[0], wallPaper[1]);
-        }
+        this.desktopRef.changeWallPaper(type, parts[1]);
         this.newWallPaper = null;
+        if(this.wallpaperNetImageRef.isVisible()){
+           this.netImageUrl.setValue('');
+        }
     },
 
     /**
@@ -484,7 +483,7 @@ Ext.define('WebOs.DesktopWidget.WallPaper.Main', {
                     this.desktopRef.changeWallPaper(WebOs.Const.WALLPAPER_IMAGE, record.raw.icon);
                     this.newWallPaper = WebOs.Const.WALLPAPER_IMAGE+ '|' + record.raw.icon;
                 },
-                //itemcontextmenu : this.getLocalImageContextMenu,
+                itemcontextmenu : this.getLocalImageContextMenu,
                 scope : this
             }
         };
@@ -507,6 +506,7 @@ Ext.define('WebOs.DesktopWidget.WallPaper.Main', {
                 toolTipText : TOOLTIP.NET_IMAGE,
                 listeners : {
                     afterrender : function(formItem){
+                       this.netImageUrl = formItem;
                         this.mixins.formTooltip.setupTooltipTarget.call(this, formItem);
                     },
                     change : this.netImageChangeHandler,
@@ -533,7 +533,52 @@ Ext.define('WebOs.DesktopWidget.WallPaper.Main', {
             }
         });
     },
-
+    
+    getLocalImageContextMenu : function(panel, record, htmlItem, index, event)
+    {
+       var MSG = this.LANG_TEXT.MSG;
+       var MENU = this.LANG_TEXT.MENU;
+       if(null == this.localMenuRef){
+         this.localMenuRef = new Ext.menu.Menu({
+            width : 100,
+            ignoreParentClicks : true,
+            items : [{
+               text : MENU.DELETE,
+               code : 1
+            }],
+            listeners : {
+               click : function(menu, item){
+                  var icon = menu.record.get('icon');
+                  var parts = this.originWallPaper.split('|');
+                  if(1 == item.code && parts[1] == icon){
+                     Cntysoft.showAlertWindow(MSG.CAN_NOT_DELETE);
+                  }else{
+                     Cntysoft.showQuestionWindow(MSG.DELETE, function(btn){
+                        if('yes' == btn){
+                           this.setLoading(MSG.DELETING);
+                           this.callApi('deleteLocalImage', icon, function(response){
+                              this.loadMask.hide();
+                              if(response.status){
+                                 Cntysoft.showAlertWindow(MSG.DELETE_SUCCESS);
+                                 this.refreshLocalImgPool();
+                              }else{
+                                 Cntysoft.Kernel.Utils.processApiError(response, this.LANG_TEXT.ERROR);
+                              }
+                           }, this);
+                        }
+                     }, this);
+                  }
+               },
+               scope : this
+            }
+         });
+       }
+       var pos = event.getXY();
+       event.stopEvent();
+       this.localMenuRef.record = record;
+       this.localMenuRef.showAt(pos[0], pos[1]);
+    },
+    
     destroy : function()
     {
         delete this.uploadBtnRef;
@@ -543,6 +588,8 @@ Ext.define('WebOs.DesktopWidget.WallPaper.Main', {
         delete this.wallPaperColorRef;
         delete this.wallPaperContainerRef;
         delete this.serverApi;
+        delete this.originWallPaper;
+        delete this.newWallPaper;
         this.callParent();
     }
 });
