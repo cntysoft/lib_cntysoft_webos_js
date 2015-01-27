@@ -75,9 +75,19 @@ Ext.define('WebOs.Kernel.ProcessModel.ProcessManager', {
     */
    runApp : function(config, callback, scope)
    {
-      Ext.apply(config, {
-         type : WebOs.Const.RUN_TYPE_APP
-      });
+      if(config.runConfig){
+         Ext.apply(config, {
+            type : WebOs.Const.RUN_TYPE_APP,
+            processConfig : {
+               runLevel : WebOs.Kernel.Const.RUN_LEVEL_USER
+            }
+         });
+      }else{
+         Ext.apply(config, {
+            type : WebOs.Const.RUN_TYPE_APP
+         });
+      }
+      
       this.runKernel(config, callback, scope);
    },
    /**
