@@ -141,6 +141,7 @@ Ext.define('WebOs.Kernel.ProcessModel.ProcessManager', {
    {
       var runConfig;
       var cls;
+       var moduleFile;
       this.checkMetaFields(config);
       var key;
       var type = config.type;
@@ -201,7 +202,7 @@ Ext.define('WebOs.Kernel.ProcessModel.ProcessManager', {
       * 判断实例是否存在
       * @todo 是否实现多实例
       */
-      process = this.getProcessByRunableName(key, type);
+      var process = this.getProcessByRunableName(key, type);
 
       if(process instanceof WebOs.Kernel.ProcessModel.Process){
          //重新运行程序
