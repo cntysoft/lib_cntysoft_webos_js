@@ -78,7 +78,7 @@ Ext.define('WebOs.DesktopWidget.AbstractWidget', {
         this.callParent([config]);
         Ext.apply(config,{
             layout : 'fit',
-            closeAction : 'hide',
+//            closeAction : 'hide',
             constrain : true,
             constrainTo : Ext.getBody(),
             bodyPadding : 1
