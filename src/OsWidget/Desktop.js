@@ -275,7 +275,9 @@ Ext.define('WebOs.OsWidget.Desktop',{
         targetWins.each(function(key, win){
             //计算显示的x坐标
             var x = win.$_x_ratio_$ * this.desktopViewRef.getWidth();
-            win.show();
+            if(win.needShow) {
+                win.show();
+            }
             win.animate({
                 to : {
                     x : x

@@ -16,6 +16,11 @@ Ext.define('WebOs.Component.Window', {
      * @private
      */
     desktopRef : null,
+    /**
+     * 判断在桌面切换的时候是否显示
+     * 主要针对closeAction为hide的窗口
+     */
+    needShow : true,
     constructor : function (config)
     {
         this.desktopRef = WebOs.R_SYS_UI_RENDER.getOsWidget(WebOs.Const.WEBOS_DESKTOP);
@@ -59,7 +64,7 @@ Ext.define('WebOs.Component.Window', {
      */
     applyConstraintConfig : function (config)
     {
-        var desktopRef = WebOs.R_SYS_UI_RENDER.getOsWidget(WebOs.Const.WEBOS_DESKTOP);
+        //var desktopRef = WebOs.R_SYS_UI_RENDER.getOsWidget(WebOs.Const.WEBOS_DESKTOP);
         Ext.apply(config, {
             hideMode : 'visibility',
             shadow : true,
