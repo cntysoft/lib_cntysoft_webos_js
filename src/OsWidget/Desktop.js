@@ -75,7 +75,7 @@ Ext.define('WebOs.OsWidget.Desktop',{
             metas[app.module].push(app);
         },this);
         this.appMetas = metas;
-        var supportedModules = WebOs.getSysEnv().get(C.ENV_SUPPORTED_MODULES);
+        var supportedModules = WebOs.getSysEnv().get(WebOs.C.ENV_SUPPORTED_MODULES);
         this.$_mkeys_$ = [];
         this.$_module_index_map_$ = {};
         var index = 0;
