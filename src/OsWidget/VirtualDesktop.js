@@ -24,8 +24,6 @@ Ext.define('WebOs.OsWidget.VirtualDesktop',{
      * 虚拟桌面的识别key
      */
     moduleKey : null,
-    //private
-    desktopRef : null,
     /**
      * 指定渲染模板
      *
