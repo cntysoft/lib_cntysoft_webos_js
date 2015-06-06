@@ -17,7 +17,7 @@ Ext.define('WebOs.Kernel.StdPath',{
        */
       getAppImagePath : function(module, app)
       {
-         return this.getSiteMgrResPath()+'/App/'+module+'/'+app;
+         return this.getStaticsPath()+'/Images/App/'+module+'/'+app;
       },
 
       /**
@@ -30,6 +30,11 @@ Ext.define('WebOs.Kernel.StdPath',{
       getAppPath : function(module, app)
       {
          return '/Apps/'+module+'/'+app;
+      },
+
+      getStaticsPath : function()
+      {
+         return '/Statics';
       },
 
       /**
