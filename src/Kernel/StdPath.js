@@ -17,7 +17,7 @@ Ext.define('WebOs.Kernel.StdPath',{
        */
       getAppImagePath : function(module, app)
       {
-         return this.getSiteMgrResPath()+'/App/'+module+'/'+app;
+         return this.getStaticsPath()+'/Images/App/'+module+'/'+app;
       },
 
       /**
@@ -40,15 +40,6 @@ Ext.define('WebOs.Kernel.StdPath',{
       getStdUploadPath : function()
       {
          return '/PrivateSpace';
-      },
-      /**
-       * 获取platform上传路径
-       *
-       * @return {String}
-       */
-      getPlatformUploadPath : function()
-      {
-         return '/PrivateSpace/Platform';
       }
    }
 });
