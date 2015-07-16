@@ -143,6 +143,7 @@ Ext.define('WebOs.Init',{
             ME : this,
             login : alias(this, 'login'),
             loginByCookie : alias(this, 'loginByCookie'),
+            logout : alias(this, 'logout'),
             updateLoadMsg : alias(this, 'updateLoadMsg'),
             hideLoadMsg : alias(this, 'hideLoadMsg'),
             removeLoadMsg : alias(this, 'removeLoadMsg'),
