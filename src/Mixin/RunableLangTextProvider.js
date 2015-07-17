@@ -84,6 +84,5 @@ Ext.define('WebOs.Mixin.RunableLangTextProvider', {
    destroy : function()
    {
       delete this.LANG_TEXT;
-      this.callParent();
    }
 });

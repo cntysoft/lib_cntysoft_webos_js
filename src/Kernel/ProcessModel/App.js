@@ -136,7 +136,6 @@ Ext.define('WebOs.Kernel.ProcessModel.App', {
       var callback;
       var scope;
       this.callParent([runConfig]);
-
       if(!Ext.isEmpty(runConfig) && !Ext.isEmpty(runConfig.widgetName)){
          if(undefined == this.widgetMap[runConfig.widgetName]){
             Cntysoft.raiseError(
@@ -199,6 +198,14 @@ Ext.define('WebOs.Kernel.ProcessModel.App', {
    {
       return this.sysEnv.get(WebOs.Const.ENV_ACL);
    },
+
+   getUploadFilesPath : function()
+   {
+      var C = FengHuang.Const;
+      var setting = this.sysEnv.get(C.ENV_SYS_SETTING);
+      return [setting.uploadRootPath,'Apps', this.module, this.name].join('/');
+   },
+
    /**
     * 系统进程模型钩子函数
     * 杀死进行钩子函数
