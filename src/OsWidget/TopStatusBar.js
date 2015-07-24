@@ -148,6 +148,7 @@ Ext.define('WebOs.OsWidget.TopStatusBar',{
       delete this.clockRef;
       delete this.clockTimer;
       delete this.startBtnRef;
+      clearTimeout(this.timer);
       if(this.sysmenuRef){
          this.sysmenuRef.destroy();
          delete this.sysmenuRef;
