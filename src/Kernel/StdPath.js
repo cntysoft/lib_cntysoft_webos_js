@@ -32,19 +32,9 @@ Ext.define('WebOs.Kernel.StdPath',{
          return '/Apps/'+module+'/'+app;
       },
 
-      getStaticsPath : function()
-      {
-         return '/Statics';
-      },
-
-      /**
-       * 获取系统标准的上传路径
-       *
-       * @returns {string}
-       */
       getStdUploadPath : function()
       {
-         return '/PrivateSpace';
+         return this.getSysDataPath()+'/UploadFiles';
       }
    }
 });
