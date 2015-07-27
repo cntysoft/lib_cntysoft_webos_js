@@ -59,6 +59,14 @@ Ext.define('WebOs.OsWidget.AppSwitchBar',{
                this.recalculateSwitchBarWidth();
                this.relocateSelf();
             },
+            add : function()
+            {
+               this.relocateSelf();
+            },
+            remove : function()
+            {
+               this.relocateSelf();
+            },
             scope : this
          },
          defaults : {
