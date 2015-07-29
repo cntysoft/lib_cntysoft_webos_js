@@ -452,7 +452,7 @@ Ext.define('WebOs.Init',{
     {
         this.hideLoadMsg();
         this.sysReady = true;
-        this.selfDataPath = this.sysEnv.get(WebOs.Kernel.Const.ENV_SYS_SETTING).selfDataRootPath;
+        this.selfDataPath = this.sysEnv.get(WebOs.Kernel.Const.ENV_SYS_SETTING).uploadRootPath;
     },
 
     /**
