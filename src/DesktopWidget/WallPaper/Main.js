@@ -480,8 +480,8 @@ Ext.define('WebOs.DesktopWidget.WallPaper.Main', {
                     this.mixins.formTooltip.setupTooltipTarget.call(this, view);
                 },
                 itemclick : function(view, record){
-                    this.desktopRef.changeWallPaper(WebOs.Const.WALLPAPER_IMAGE, record.raw.icon);
-                    this.newWallPaper = WebOs.Const.WALLPAPER_IMAGE+ '|' + record.raw.icon;
+                    this.desktopRef.changeWallPaper(WebOs.Const.WALLPAPER_IMAGE, record.get('icon'));
+                    this.newWallPaper = WebOs.Const.WALLPAPER_IMAGE+ '|' + record.get('icon');
                 },
                 itemcontextmenu : this.getLocalImageContextMenu,
                 scope : this
