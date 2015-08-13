@@ -44,6 +44,10 @@ Ext.define('WebOs.OsWidget.TreeNavWidget', {
     * @property {Ext.menu.Menu} contextMenu
     */
    contextMenu : null,
+   /**
+    * @property {Ext.button.Button} gobackBtnRef
+    */
+   gobackBtnRef : null,
    model : [
       {name : 'id', type : 'string', persist : false},
       {name : 'text', type : 'string', persist : false},
@@ -51,10 +55,36 @@ Ext.define('WebOs.OsWidget.TreeNavWidget', {
    ],
    initComponent : function()
    {
+      this.LANG_TEXT = WebOs.GET_LANG_TEXT('DESKTOP.TREE_NAV_WIDGET');
       this.viewStore = this.getViewStore();
       this.navStore = this.getNavStoreObject();
       var appRef = this.appRef;
       Ext.apply(this, {
+         tbar : {
+            xtype : 'toolbar',
+            layout : {
+               type : 'vbox',
+               align : 'end',
+               padding : '0 5 0 0'
+            },
+
+            items : {
+               xtype : 'button',
+               text : this.LANG_TEXT.BTN.GO_BACK,
+               disabled : true,
+               listeners : {
+                  afterrender : function(btn)
+                  {
+                     this.gobackBtnRef = btn;
+                  },
+                  click : function()
+                  {
+                     this.loadParentView();
+                  },
+                  scope : this
+               }
+            }
+         },
          items : [{
             xtype : 'senchaexticonview',
             iconWidth : 64,
@@ -152,7 +182,26 @@ Ext.define('WebOs.OsWidget.TreeNavWidget', {
       if(len > 0){
          this.viewStore.loadData(items);
       }
+      if(node.isRoot()){
+         this.gobackBtnRef.setDisabled(true);
+      }else{
+         this.gobackBtnRef.setDisabled(false);
+      }
       this.currentNode = node;
+   },
+
+   /**
+    * 加载父节点的数据内容
+    *
+    * @property {Ext.data.NodeInterface} node
+    */
+   loadParentView : function()
+   {
+      var current = this.currentNode;
+      var parent = current.parentNode;
+      if(parent){
+         this.loadView(parent);
+      }
    },
 
    getContextMenu : function(record)
@@ -220,6 +269,7 @@ Ext.define('WebOs.OsWidget.TreeNavWidget', {
       delete this.navStore;
       delete this.viewStore;
       delete this.viewObject;
+      delete this.gobackBtnRef;
       this.callParent();
    }
 });
