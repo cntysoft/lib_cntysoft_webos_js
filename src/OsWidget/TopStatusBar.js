@@ -119,27 +119,27 @@ Ext.define('WebOs.OsWidget.TopStatusBar',{
          iconCls : 'webos-notification-btn-icon',
          cls : 'webos-notification-btn',
          height : this.self.HEIGHT,
-         listeners : {
-            afterrender : function(btn)
-            {
-               btn.el.on({
-                  mousedown : function(){
-                     btn.setIconCls('webos-notification-btn-icon-click');
-                  },
-                  mouseup : function()
-                  {
-                     btn.setIconCls('webos-notification-btn-icon');
-                  },
-                  scope : this
-               });
-            },
-            click : function()
-            {
-               var target = Ext.getCmp(WebOs.Const.WEBOS_DESKTOP);
-               target.toggleNotificationPanel();
-            },
-            scope : this
-         }
+         //listeners : {
+         //   afterrender : function(btn)
+         //   {
+         //      btn.el.on({
+         //         mousedown : function(){
+         //            btn.setIconCls('webos-notification-btn-icon-click');
+         //         },
+         //         mouseup : function()
+         //         {
+         //            btn.setIconCls('webos-notification-btn-icon');
+         //         },
+         //         scope : this
+         //      });
+         //   },
+         //   click : function()
+         //   {
+         //      var target = Ext.getCmp(WebOs.Const.WEBOS_DESKTOP);
+         //      target.toggleNotificationPanel();
+         //   },
+         //   scope : this
+         //}
       };
    },
    destroy : function()
