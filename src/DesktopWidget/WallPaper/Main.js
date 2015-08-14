@@ -60,6 +60,9 @@ Ext.define('WebOs.DesktopWidget.WallPaper.Main', {
      * 这个是服务器端的接口，平台管理和正常的webos可能需要需要请求的网址内容不一样，修复这个bug
      */
     serverApi : null,
+
+    imgRefMap : null,
+    fileRefs : [],
     constructor : function()
     {
         this.mixins.formTooltip.constructor.call(this);
@@ -69,6 +72,7 @@ Ext.define('WebOs.DesktopWidget.WallPaper.Main', {
         this.originWallPaper = this.currentUser.wallPaper;
         this.desktopRef = WebOs.R_SYS_UI_RENDER.getOsWidget(WebOs.Const.WEBOS_DESKTOP);
         this.wallPaperDir = WebOs.ME.getSelfDataRootPath()+'/WallPaper/'+this.currentUser.name;
+        this.imgRefMap = new Ext.util.HashMap();
         this.callParent(arguments);
     },
 
@@ -133,61 +137,21 @@ Ext.define('WebOs.DesktopWidget.WallPaper.Main', {
 
     refreshLocalImgPool : function()
     {
-        this.wallpaperLocalImageRef.getStore().load({
-            params : {
-                path : this.wallPaperDir
-            }
-        });
-    },
-
-    /**
-     * 获取本地的图片的存储
-     */
-    getLocalImageStore : function()
-    {
-        return new Ext.data.Store({
-            fields : [
-                {name : 'id', type : 'string'},
-                {name : 'name', type : 'string'},
-                {name : 'icon', type : 'string'},
-                {name : 'type', type : 'string'}
-            ],
-            proxy : this.getDkWidgetApiProxy('getLocalImages')
-        });
-    },
-
-    /**
-     * 获取widget的API代理配置对象
-     *
-     * @return {Object}
-     */
-    getDkWidgetApiProxy : function(method)
-    {
-        var me = this;
-        var serverScriptName = this.widgetName;
-        if(this.serverApi){
-            serverScriptName = this.serverApi.getServerScriptName();
-        }
-        return {
-            type : 'apigateway',
-            callType : 'Sys',
-            invokeMetaInfo : {
-                name : 'DkWidget',
-                method : 'dispatcherRequest'
-            },
-            invokeParamsReady : function(params)
-            {
-                return {
-                    key : serverScriptName,
-                    method : method,
-                    args : params
-                };
-            },
-            reader : {
-                type : 'json',
-                rootProperty : 'items'
-            }
-        };
+       this.callApi('getLocalImages', '', function(response){
+          this.fileRefs = [];
+          this.imgRefMap.clear();
+          var maps = [];
+          Ext.Array.forEach(response.data.imgRefMap, function(ref){
+             this.imgRefMap.add(ref[0], ref[1]);
+             maps.push({'icon' : ref[0]});
+          }, this);
+          if(Ext.isArray(response.data.fileRefs)){
+             Ext.Array.forEach(response.data.fileRefs, function(ref){
+                this.fileRefs.push(parseInt(ref));
+             }, this);
+          }
+          this.wallpaperLocalImageRef.getStore().loadData(maps);
+       }, this);
     },
 
     /**
@@ -237,8 +201,6 @@ Ext.define('WebOs.DesktopWidget.WallPaper.Main', {
         }
     },
 
-
-
     afterSaveHandler : function(response)
     {
         var MSG = this.LANG_TEXT.MSG;
@@ -283,9 +245,9 @@ Ext.define('WebOs.DesktopWidget.WallPaper.Main', {
         var type = parseInt(parts[0]);
         this.desktopRef.changeWallPaper(type, parts[1]);
         this.newWallPaper = null;
-        if(this.wallpaperNetImageRef.isVisible()){
-           this.netImageUrl.setValue('');
-        }
+        //if(this.wallpaperNetImageRef.isVisible()){
+        //   this.netImageUrl.setValue('');
+        //}
     },
 
     /**
@@ -305,9 +267,25 @@ Ext.define('WebOs.DesktopWidget.WallPaper.Main', {
         this.newWallPaper = null;
     },
 
-    uploadSuccessHandler : function()
+    uploadSuccessHandler : function(file)
     {
-        this.refreshLocalImgPool();
+       var maps = [];
+       this.imgRefMap.each(function(key, value){
+          maps.push([key, value]);
+       }, this);
+       maps.push([file[0].filename, parseInt(file[0].rid)]);
+
+       this.fileRefs.push(parseInt(file[0].rid));
+       this.callApi('updateUserProfile', {
+          'fileRefs' : this.fileRefs,
+          'imgRefMap' : maps
+       }, function(response){
+          if(!response.status){
+             Cntysoft.showErrorWindow(response.msg);
+          }else{
+             this.refreshLocalImgPool();
+          }
+       }, this);
     },
 
     /**
@@ -389,7 +367,7 @@ Ext.define('WebOs.DesktopWidget.WallPaper.Main', {
             fileTypeExts : ['gif', 'png', 'jpg', 'jpeg'],
             margin : '0 0 0 5',
             hidden : true,
-            enableFileRef : false,
+            enableFileRef : true,
             maskTarget : this,
             toolTipText : TOOLTIP.UPLOADER_BTN,
             buttonText : BTN.UPLOAD,
@@ -473,7 +451,7 @@ Ext.define('WebOs.DesktopWidget.WallPaper.Main', {
             autoScroll : false,
             layout : 'fit',
             toolTipText : TOOLTIP.LOCAL_IMAGE,
-            store : this.getLocalImageStore(),
+            store : this.getLocalStore(),
             listeners : {
                 afterrender : function(view){
                     this.wallpaperLocalImageRef = view;
@@ -488,7 +466,15 @@ Ext.define('WebOs.DesktopWidget.WallPaper.Main', {
             }
         };
     },
-
+   getLocalStore : function()
+   {
+      return new Ext.data.Store({
+         fields : [
+            {name : 'icon', type : 'string'}
+         ],
+         autoLoad : false
+      });
+   },
     getWallpaperNetImagePanelConfig : function()
     {
         var NET_IMAGE = this.LANG_TEXT.NET_IMAGE;
@@ -556,7 +542,22 @@ Ext.define('WebOs.DesktopWidget.WallPaper.Main', {
                      Cntysoft.showQuestionWindow(MSG.DELETE, function(btn){
                         if('yes' == btn){
                            this.setLoading(MSG.DELETING);
-                           this.callApi('deleteLocalImage', icon, function(response){
+                           var maps = [], dfile;
+                           this.imgRefMap.each(function(key, value){
+                              if(key == icon){
+                                 this.imgRefMap.removeAtKey(key);
+                                 Ext.Array.remove(this.fileRefs, value);
+                                 dfile = value;
+                              }else{
+                                 maps.push([key, value]);
+                              }
+                           }, this);
+
+                           this.callApi('deleteLocalImage', {
+                              'fileRefs' : this.fileRefs,
+                              'deleteFileRefs' : dfile,
+                              'imgRefMap' : maps
+                           }, function(response){
                               this.loadMask.hide();
                               if(response.status){
                                  Cntysoft.showAlertWindow(MSG.DELETE_SUCCESS);
