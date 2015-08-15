@@ -118,7 +118,7 @@ Ext.define('WebOs.OsWidget.TopStatusBar',{
          xtype : 'button',
          iconCls : 'webos-notification-btn-icon',
          cls : 'webos-notification-btn',
-         height : this.self.HEIGHT,
+         height : this.self.HEIGHT
          //listeners : {
          //   afterrender : function(btn)
          //   {

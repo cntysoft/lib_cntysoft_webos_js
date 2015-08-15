@@ -349,7 +349,7 @@ Ext.define('WebOs.DesktopWidget.WallPaper.Main', {
             fields : ['type', 'name'],
             data : [
                 {type : "Color", "name" : TITLE.COLOR},
-                {type : "WallpaperLocalImage", "name" : TITLE.LOCAL_IMAGE},
+                {type : "WallpaperLocalImage", "name" : TITLE.LOCAL_IMAGE}
                 //{type : "WallpaperNetImage", "name" : TITLE.NET_IMAGE}
             ]
         });
@@ -421,7 +421,7 @@ Ext.define('WebOs.DesktopWidget.WallPaper.Main', {
             flex : 1,
             items : [
                 this.getColorSettingPanelConfig(),
-                this.getWallpaperLocalImagePanelConfig(),
+                this.getWallpaperLocalImagePanelConfig()
                 //this.getWallpaperNetImagePanelConfig()
             ]
         };
