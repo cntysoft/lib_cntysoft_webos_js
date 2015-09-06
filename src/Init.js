@@ -5,6 +5,9 @@
  * @copyright  Copyright (c) 2010-2011 Cntysoft Technologies China Inc. <http://www.cntysoft.com>
  * @license    http://www.cntysoft.com/license/new-bsd     New BSD License
  */
+/**
+ * WEBOS 系统全局初始化对象
+ */
 Ext.define('WebOs.Init',{
     requires : [
         'Cntysoft.Kernel.SysEnv',

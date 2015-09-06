@@ -5,6 +5,9 @@
  * @copyright  Copyright (c) 2010-2011 Cntysoft Technologies China Inc. <http://www.cntysoft.com>
  * @license    http://www.cntysoft.com/license/new-bsd     New BSD License
  */
+/**
+ * 系统工具类，在这个类中定义了系统级别常用的函数
+ */
 Ext.define('WebOs.Utils', {
    statics : {
       /**
