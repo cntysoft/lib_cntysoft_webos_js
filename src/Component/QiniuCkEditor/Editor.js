@@ -13,7 +13,7 @@ Ext.define('WebOs.Component.QiniuCkEditor.Editor', {
    uploadRequestMeta : {
       url : WebOs.Kernel.Const.API_GATE_SYS,
       meta : {
-         name : 'WebUploaderHandler',
+         name : 'WebUploader',
          method : 'process'
       }
    }
