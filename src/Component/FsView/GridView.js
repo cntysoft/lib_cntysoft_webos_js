@@ -39,14 +39,14 @@ Ext.define('WebOs.Component.FsView.GridView', {
                listeners : {
                   uploadcomplete : function()
                   {
-                     this.uploaderRef.close();
                      this.refresh();
                   },
                   scope : this
                },
                uploaderConfig : {
                   randomize : false,
-                  fileTypeExts : ['gif', 'png', 'jpg', 'jpeg', 'txt', 'rar', 'zip', 'tar.gz', 'html', 'css', 'js']
+                  fileTypeExts : ['gif', 'png', 'jpg', 'jpeg', 'txt', 'rar', 'zip', 'tar.gz', 'html', 'css', 'js'],
+                  useOss : false
                }
             });
             this.uploaderRef = new WebOs.Component.Uploader.Window(this.uploaderConfig);
