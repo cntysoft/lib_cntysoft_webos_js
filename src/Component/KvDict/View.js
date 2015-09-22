@@ -28,7 +28,7 @@ Ext.define('WebOs.Component.KvDict.View', {
    allowMulti : false,
    /**
     * @private
-    * @propety {Ext.grid.Panel} dataListRef
+    * @property {Ext.grid.Panel} dataListRef
     */
    dataListRef : null,
    /**

@@ -5,6 +5,9 @@
  * @copyright  Copyright (c) 2010-2011 Cntysoft Technologies China Inc. <http://www.cntysoft.com>
  * @license    http://www.cntysoft.com/license/new-bsd     New BSD License
  */
+/**
+ * WEBOS内核标准路径常量类
+ */
 Ext.define('WebOs.Kernel.StdPath',{
    extend : 'Cntysoft.Kernel.StdPath',
    inheritableStatics : {

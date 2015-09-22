@@ -13,8 +13,8 @@ Ext.define('WebOs.Utils', {
       /**
        * 获取app图标的css类名称
        *
-       * @param module
-       * @param app
+       * @param {String} module
+       * @param {String} app
        * @returns {string}
        */
       getAppIconCls : function(module, app)
@@ -25,9 +25,9 @@ Ext.define('WebOs.Utils', {
       /**
        * 获取App的widget icon 类名称
        *
-       * @param module
-       * @param app
-       * @param widget
+       * @param {String} module
+       * @param {String} app
+       * @param {String} widget
        */
       getWidgetIconCls : function(module, app, widget)
       {

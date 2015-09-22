@@ -5,6 +5,9 @@
  * @copyright  Copyright (c) 2010-2011 Cntysoft Technologies China Inc. <http://www.cntysoft.com>
  * @license    http://www.cntysoft.com/license/new-bsd     New BSD License
  */
+/**
+ * WEBOS桌面壁纸设置小组件语言包
+ */
 Ext.define('WebOs.DesktopWidget.WallPaper.Lang.zh_CN', {
     extend : 'Cntysoft.Kernel.AbstractLangHelper',
     data : {

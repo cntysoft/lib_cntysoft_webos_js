@@ -5,6 +5,9 @@
  * @copyright  Copyright (c) 2010-2011 Cntysoft Technologies China Inc. <http://www.cntysoft.com>
  * @license    http://www.cntysoft.com/license/new-bsd     New BSD License
  */
+/**
+ * WEBOS内核常量定义
+ */
 Ext.define('WebOs.Kernel.Const', {
    extend : 'Cntysoft.Kernel.Const',
    inheritableStatics: {

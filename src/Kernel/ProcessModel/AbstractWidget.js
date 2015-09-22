@@ -152,7 +152,7 @@ Ext.define('WebOs.Kernel.ProcessModel.AbstractWidget', {
       });
    },
    /**
-    * @see {Cntysoft.Kernel.AbstractLangHelper#getText}
+    * {@see Cntysoft.Kernel.AbstractLangHelper#getText}
     */
    GET_LANG_TEXT : function(key)
    {

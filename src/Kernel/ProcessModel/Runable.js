@@ -40,7 +40,7 @@ Ext.define('WebOs.Kernel.ProcessModel.Runable', {
    /**
     * 运行实体的名称 这个值是全局唯一的
     * 名称的结构 ModuleName.AppName
-    * @todo怎么保证这个全局唯一性
+    * 怎么保证这个全局唯一性
     *
     * @property {string} id
     */
@@ -196,7 +196,7 @@ Ext.define('WebOs.Kernel.ProcessModel.Runable', {
    getLangCls : Ext.emptyFn,
    /**
     * 获取应用程序范围里面的语言数据,使用大写的为了让大家知道这个是一个特殊的方法
-    * @see {Cntysoft.Kernel.AbstractLangHelper#getText}
+    * {@see Cntysoft.Kernel.AbstractLangHelper#getText}
     *
     * @param {String} key
     * @return {Object}

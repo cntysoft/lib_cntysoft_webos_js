@@ -87,7 +87,7 @@ Ext.define('WebOs.Kernel.ProcessModel.Process', {
       /**
        * 进程调用方式 Widget的调用方式
        *
-       * @eadyonly {Integer} I_TYPE_WIDGET
+       * @readonly {Integer} I_TYPE_WIDGET
        */
       I_TYPE_WIDGET : 1,
       /**
@@ -334,7 +334,6 @@ Ext.define('WebOs.Kernel.ProcessModel.Process', {
        * 这里是否要探测状态
        * 可能程序有未保存的数据
        * @ignore
-       * @todo
        */
       this.runable.kill();
       this.killed = true;

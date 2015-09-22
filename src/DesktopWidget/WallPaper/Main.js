@@ -5,6 +5,9 @@
  * @copyright  Copyright (c) 2010-2011 Cntysoft Technologies China Inc. <http://www.cntysoft.com>
  * @license    http://www.cntysoft.com/license/new-bsd     New BSD License
  */
+/**
+ * WEBOS桌面环境壁纸设置程序
+ */
 Ext.define('WebOs.DesktopWidget.WallPaper.Main', {
     extend: 'WebOs.DesktopWidget.AbstractWidget',
     requires: [

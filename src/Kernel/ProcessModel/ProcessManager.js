@@ -200,7 +200,7 @@ Ext.define('WebOs.Kernel.ProcessModel.ProcessManager', {
       //创建相关进程
       /**
       * 判断实例是否存在
-      * @todo 是否实现多实例
+      * 是否实现多实例
       */
       var process = this.getProcessByRunableName(key, type);
 
@@ -629,7 +629,7 @@ Ext.define('WebOs.Kernel.ProcessModel.ProcessManager', {
    attachDefaultListeners : function()
    {
       /**
-      * @todo 这里可以用relay event实现
+      * 这里可以用relay event实现
       */
       this.addListener({
          add : function(index, item){
@@ -702,7 +702,7 @@ Ext.define('WebOs.Kernel.ProcessModel.ProcessManager', {
       return;
       metaInfo = runables.getByKey(key);
       /**
-       * @todo 在这里是否检查必要字段
+       * 在这里是否检查必要字段
        */
       if(Ext.isEmpty(metaInfo)){
          //当前请求的程序的meta信息不存在，证明不能被运行

@@ -172,7 +172,7 @@ Ext.define('WebOs.OsWidget.VirtualDesktop',{
     },
 
     /**
-     * @inhritdoc
+     * @inheritdoc
      */
     onBoxReady : function(width, height)
     {

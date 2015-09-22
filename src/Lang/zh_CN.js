@@ -5,6 +5,9 @@
  * @copyright  Copyright (c) 2010-2011 Cntysoft Technologies China Inc. <http://www.cntysoft.com>
  * @license    http://www.cntysoft.com/license/new-bsd     New BSD License
  */
+/**
+ * WEBOS语言包
+ */
 Ext.define('WebOs.Lang.zh_CN', {
     extend : 'Cntysoft.Kernel.AbstractLangHelper',
     data : {
