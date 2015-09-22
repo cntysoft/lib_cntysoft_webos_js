@@ -155,7 +155,7 @@ Ext.define('WebOs.Kernel.ProcessModel.App', {
          this.process.$_invoke_type_$ = Ext.getClass(this.process).I_TYPE_API;
       }
       //为了调用功能
-      /**
+      /*
        * 刚开始准备写一个派发的接口，但是想想还是不这样为好，应为应用程序里面的lib类还是不要直接被外界所调用，
        * 一 不方便
        * 二 应用程序对外的接口应该通过Main类对外公开
