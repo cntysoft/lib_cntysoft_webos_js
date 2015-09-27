@@ -535,5 +535,5 @@ Ext.define('WebOs.Init', {
       var C = FengHuang.Const;
       var setting = this.sysEnv.get(C.ENV_SYS_SETTING);
       return [setting.uploadRootPath, 'Apps', module, appname].join('/');
-   },
+   }
 });
