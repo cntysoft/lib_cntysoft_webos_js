@@ -201,8 +201,7 @@ Ext.define('WebOs.Kernel.ProcessModel.App', {
 
    getUploadFilesPath : function()
    {
-      var C = FengHuang.Const;
-      var setting = this.sysEnv.get(C.ENV_SYS_SETTING);
+      var setting = this.sysEnv.get(WebOs.Const.ENV_SYS_SETTING);
       return [setting.uploadRootPath,'Apps', this.module, this.name].join('/');
    },
 
