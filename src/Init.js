@@ -532,7 +532,7 @@ Ext.define('WebOs.Init', {
     */
    getAppUploadFilesPath: function(module, appname)
    {
-      var C = FengHuang.Const;
+      var C = WebOs.Const;
       var setting = this.sysEnv.get(C.ENV_SYS_SETTING);
       return [setting.uploadRootPath, 'Apps', module, appname].join('/');
    }
