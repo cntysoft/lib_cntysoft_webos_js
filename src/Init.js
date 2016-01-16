@@ -90,6 +90,8 @@ Ext.define('WebOs.Init', {
     * @property {String} selfDataPath
     */
    selfDataPath: null,
+   
+   G_OBJ_REFS : {},
    constructor: function()
    {
       this.mixins.observable.constructor.call(this);
