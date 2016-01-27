@@ -118,15 +118,15 @@ Ext.define('WebOs.OsWidget.TreeNavWidget', {
     */
    applyConstraintConfig : function(config)
    {
-
       this.callParent([config]);
       Ext.apply(config, {
          bodyStyle : {
             background : '#ffffff'
          },
          width : 600,
-         height : 300,
+         height : 320,
          resizable : false,
+         maximizable: false,
          closable : true
       });
 
@@ -136,7 +136,44 @@ Ext.define('WebOs.OsWidget.TreeNavWidget', {
     *
     * @return {Object}
     */
-   getNavTreeData : Ext.emptyFn,
+   getNavTreeData : function()
+   {
+      var acl = WebOs.getSysEnv().get(WebOs.Const.ENV_ACL);
+      var widgets = acl[this.appRef.id];
+
+      return {
+         id: 'root',
+         name: widgets.text,
+         children: this.getChildrenWidgets(widgets)
+      };
+   },
+   
+   getChildrenWidgets : function(widgets)
+   {
+      var ret = [];
+      for(var widget in widgets){
+         if('text' != widget){
+            var wid = widgets[widget];
+            var keys = Ext.Object.getAllKeys(wid);
+            if(1 == keys.length){
+               ret.push({
+                  text : wid.text,
+                  id : widget,
+                  leaf : true
+               });
+            }else{
+               ret.push({
+                  text : wid.text,
+                  id : widget,
+                  leaf : false,
+                  children : this.getChildrenWidgets(wid)
+               });
+            }
+         }
+      }
+      return ret;
+   },
+   
    /**
     * 默认打开Widget窗口
     *
