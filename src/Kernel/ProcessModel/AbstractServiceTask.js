@@ -7,7 +7,7 @@
  */
 Ext.define("WebOs.Kernel.ProcessModel.AbstractServiceTask", {
    mixins : {
-      observable : "Ext.util.Observable",
+      observable : "Ext.util.Observable"
    },
    /**
     * @var {Cntysoft.Framework.Rpc.ServiceInvoker} serviceInvoker
