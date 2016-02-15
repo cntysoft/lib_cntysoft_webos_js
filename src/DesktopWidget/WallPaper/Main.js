@@ -370,6 +370,7 @@ Ext.define('WebOs.DesktopWidget.WallPaper.Main', {
             fileTypeExts : ['gif', 'png', 'jpg', 'jpeg'],
             margin : '0 0 0 5',
             hidden : true,
+            useOss : false,
             enableFileRef : true,
             maskTarget : this,
             toolTipText : TOOLTIP.UPLOADER_BTN,
