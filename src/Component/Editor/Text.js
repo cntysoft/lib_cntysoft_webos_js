@@ -217,8 +217,14 @@ Ext.define('WebOs.Component.Editor.Text', {
       if(!response.status){
          Cntysoft.raiseError(Ext.getClassName(this), 'loadFileHandler', 'load  file error : ' + response.msg);
       } else{
-         this.orgValue = response.data.content;
-         this.editorRef.setValue(response.data.content);
+         var content;
+         if(response.isWebsocketResponse){
+            content = response.getDataItem("content");
+         }else{
+            content = response.response.data.content;
+         }
+         this.orgValue = content;
+         this.editorRef.setValue(content);
          this.editorFirstAssignedValueHandler();
       }
    },
